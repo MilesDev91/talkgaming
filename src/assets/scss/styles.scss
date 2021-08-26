@@ -1,0 +1,17 @@
+$body-background: #cbd9f0;
+$text-color: #2c3e50;
+$nav-background-color: rgb(103, 108, 112);
+$nav-link-active: rgb(215, 219, 223);
+$nav-text-color: rgb(247, 254, 255);
+
+body {
+  background-color: $body-background;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: $text-color;
+}
