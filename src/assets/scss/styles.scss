@@ -3,9 +3,14 @@ $text-color: #2c3e50;
 $nav-background-color: rgb(103, 108, 112);
 $nav-link-active: rgb(215, 219, 223);
 $nav-text-color: rgb(247, 254, 255);
+$forum-contents-background-color: aliceblue;
 
 body {
   background-color: $body-background;
+}
+
+p {
+  font-size: .8rem;
 }
 
 #app {
