@@ -1,58 +1,60 @@
 <template>
-  <div class="post">
-    {{ title }}
-  </div>
+  <u-post :post="post"></u-post>
 </template>
 
 <script>
 import { useRoute } from "vue-router";
+import { useStore } from "vuex";
+import { computed } from "vue";
 
 export default {
+  name: "Post",
   setup() {
     const route = useRoute();
+    const store = useStore();
 
-    const title = route.params.title;
+    const post = computed(() => {
+      let posts = store.state.posts;
+      let post;
+      for (var key in posts) {
+        if (posts[key].id == route.params.id) {
+          post = posts[key];
+        }
+      }
+      return post;
+    });
 
-    return { title };
+    return { post };
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/styles.scss";
+
+.post-container {
+  background-color: $forum-contents-background-color;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 0.4rem;
+  justify-content: center;
+  margin: 1rem auto;
+  width: 80%;
+  overflow: visible;
+}
+
+@media (min-width: 500px) {
+  .post-container {
+    width: 60%;
+  }
+}
+
 .post {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid black;
-  width: 100%;
+  max-width: 80%;
   overflow: hidden;
-}
-
-.title {
-  border-bottom: 1px solid gray;
-  margin: 0.1rem auto;
-  width: 100%;
-  display: flex;
-}
-
-.title h4 {
-  padding: 0.2rem;
-  margin: 0;
-}
-
-.title-label {
-  border-right: 1px solid gray;
-}
-
-h4.go-to {
-  margin-left: auto;
-}
-
-.content {
-  background-color: rgb(226, 224, 224);
-  height: 2.5rem;
-  text-align: start;
-  padding: 0.1rem 0.2rem;
-  margin: 0;
-  position: relative;
 }
 </style>
