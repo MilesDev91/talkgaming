@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <a class="nav-logo" href="/">JnS Metals</a>
+    <a class="nav-logo" href="/">Talk Gaming</a>
     <div class="nav-links">
       <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
