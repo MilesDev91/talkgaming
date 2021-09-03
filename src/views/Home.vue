@@ -24,6 +24,7 @@
 <script>
 import { useRouter } from "vue-router";
 import { useState } from "@/maphelpers";
+import { useStore } from "vuex";
 
 export default {
   name: "Home",
@@ -34,8 +35,11 @@ export default {
     },
   },
   setup() {
-    // Router setup
     const router = useRouter();
+    const store = useStore();
+
+    // Setup categories
+    store.dispatch("getCategories");
 
     // Store mappings
     const { categories } = useState(["categories"]);

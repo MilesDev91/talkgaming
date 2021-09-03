@@ -1,58 +1,73 @@
 import { createStore } from 'vuex'
 
+// Setup firestore database reference
+import { initializeApp } from 'firebase/app'
+import { doc, where, getFirestore, query, onSnapshot, collection, getDocs } from 'firebase/firestore'
+const firebaseApp = initializeApp({
+  apiKey: "AIzaSyDeY4ERVmHTigYU4UUb_xletCptx14tCSI",
+  authDomain: "talk-gaming.firebaseapp.com",
+  projectId: "talk-gaming",
+  storageBucket: "talk-gaming.appspot.com",
+  messagingSenderId: "805516133596",
+  appId: "1:805516133596:web:0829b15fc1931fc833a019",
+  measurementId: "G-SPQL9KXK54"
+})
+// Export database for use elsewhere
+export const database = getFirestore(firebaseApp);
+
 export default createStore({
   // TODO: Modularize store
   state: {
-    // TODO: Manage categories and games in database
-    categories: [
-      { title: "Action", image: "action_game.jpg" },
-      { title: "RPG", image: "rpg_game.jpg" },
-      { title: "Adventure", image: "adventure_game.jpg" },
-      { title: "Strategy", image: "strategy_game.jpg" }],
-
-    // TODO: Manage posts in database. Base posts on users
-    posts: [
-      {
-        title: 'Example Post',
-        content: 'This is just an example post for action games!',
-        category: 'Action',
-        id: 0
-      },
-      {
-        title: 'Example 2',
-        content: 'This is a 2nd test post! I am making the content longer as well. This is to test content overflow. We only want to show a specific amount of content',
-        category: 'Action',
-        id: 1
-      },
-      {
-
-        title: 'Another post?',
-        content: 'Example post for some good ol RPG',
-        category: 'RPG',
-        id: 2
-
-      },
-      {
-
-        title: 'Just another',
-        content: 'Wanna play a strategy game together?',
-        category: 'Strategy',
-        id: 3
-
-      },
-      {
-
-        title: 'Found a post did you',
-        content: "Let's play an adventure game!",
-        category: 'Adventure',
-        id: 4
-
-      }
-    ]
+    // TODO: Manage games in database
+    categories: [],
+    posts: []
   },
   mutations: {
+    setPosts (state, posts) {
+      state.posts = posts
+    },
+    setCategories (state, categories) {
+      state.categories = categories
+    }
   },
   actions: {
+    // Gets multiple posts in category from database
+    getPostsByCategory ({ commit }, category) {
+      const postsQuery = query(collection(database, "posts"), where("category", "==", category))
+      onSnapshot(postsQuery, (querySnapshot) => {
+        // For each post document, append to new array.
+        const posts = []
+        querySnapshot.forEach((doc) => {
+          // We have to document id for reference reasons
+          let post = {
+            ...doc.data(),
+            id: doc.id
+          };
+          posts.push(post)
+        })
+        commit("setPosts", posts)
+      })
+    },
+    // Gets a single post by id from database
+    getPostById ({ commit }, id) {
+      onSnapshot(doc(database, "posts", id), (doc) => {
+        let post = {
+          ...doc.data(),
+          id
+        }
+        commit("setPosts", post)
+      })
+    },
+    // Gets our categories from database
+    async getCategories ({ commit }) {
+      const categoriesSnapshot = await getDocs(collection(database, "categories"))
+      let categories = []
+      categoriesSnapshot.forEach((doc) => {
+        let category = doc.data()
+        categories.push(category)
+      })
+      commit("setCategories", categories)
+    }
   },
   modules: {
   }
