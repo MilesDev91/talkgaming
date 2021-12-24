@@ -14,14 +14,8 @@ export default {
     const store = useStore();
 
     const post = computed(() => {
-      let posts = store.state.posts;
-      let post;
-      for (var key in posts) {
-        if (posts[key].id == route.params.id) {
-          post = posts[key];
-        }
-      }
-      return post;
+      store.dispatch("getPostById", route.params.id);
+      return store.state.posts;
     });
 
     return { post };

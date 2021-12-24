@@ -27,18 +27,12 @@ export default {
 
     const category = route.params.category;
 
-    // This filters post to only those in this category. Database will be arranged differently, so this will be redone
-    // TODO: do this in firebase or handle in store with firebase
-    const filteredPosts = computed(() => {
-      let posts = store.state.posts;
-      let filteredArray = [];
+    // Setup posts in store
+    store.dispatch("getPostsByCategory", category);
 
-      for (var key in posts) {
-        if (posts[key].category == category) {
-          filteredArray.push(posts[key]);
-        }
-      }
-      return filteredArray;
+    // This filters post to only those in this category.
+    const filteredPosts = computed(() => {
+      return store.state.posts;
     });
 
     // Goes to specific post.

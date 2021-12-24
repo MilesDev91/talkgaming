@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed } from "vue";
 
 export default {
   props: {
@@ -30,9 +30,15 @@ export default {
     },
   },
   setup(props) {
-    const title = ref(props.post.title);
-    const content = ref(props.post.content);
-    const isGrouped = ref(props.grouped);
+    const title = computed(() => {
+      return props.post.title;
+    });
+    const content = computed(() => {
+      return props.post.content;
+    });
+    const isGrouped = computed(() => {
+      return props.grouped;
+    });
     return { title, content, isGrouped };
   },
 };
