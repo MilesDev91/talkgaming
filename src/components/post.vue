@@ -51,24 +51,8 @@ export default {
   background-color: $forum-contents-background-color;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   justify-content: center;
   margin: 0 auto;
-  width: 80%;
-  overflow: hidden;
-}
-
-@media (min-width: 500px) {
-  .post-container {
-    width: 60%;
-  }
-}
-
-.post {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid black;
-  max-width: 80%;
   overflow: hidden;
 }
 

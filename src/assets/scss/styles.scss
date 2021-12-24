@@ -1,4 +1,4 @@
-$body-background: #a8bcdd;
+$app-background: #a8bcdd;
 $text-color: #2c3e50;
 $nav-background-color: rgb(103, 108, 112);
 $nav-link-active: rgb(215, 219, 223);
@@ -6,7 +6,8 @@ $nav-text-color: rgb(247, 254, 255);
 $forum-contents-background-color: aliceblue;
 
 body {
-  background-color: $body-background;
+  background-color: rgb(232, 241, 240);
+  margin: 0;
 }
 
 p {
@@ -19,4 +20,14 @@ p {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $text-color;
+  background-color: $app-background;
+  height: 100vh;
+}
+
+@media (min-width: 500px) {
+  #app {
+    width: 70%;
+    margin: 0 auto;
+    box-shadow: 0px 0px 4px black;
+  }
 }

@@ -72,6 +72,7 @@ export default {
   margin: 1rem 0;
   display: flex;
   overflow: hidden;
+  box-shadow: 2px 2px 5px rgb(56, 56, 56);
 }
 
 @media (min-width: 500px) {

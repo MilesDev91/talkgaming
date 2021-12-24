@@ -30,25 +30,17 @@ export default {
   background-color: $forum-contents-background-color;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   border-radius: 0.4rem;
   justify-content: center;
   margin: 1rem auto;
   width: 80%;
   overflow: visible;
+  box-shadow: 2px 2px 5px rgb(56, 56, 56);
 }
 
 @media (min-width: 500px) {
   .post-container {
     width: 60%;
   }
-}
-
-.post {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid black;
-  max-width: 80%;
-  overflow: hidden;
 }
 </style>
