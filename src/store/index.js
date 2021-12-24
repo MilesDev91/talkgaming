@@ -12,7 +12,6 @@ const firebaseApp = initializeApp({
   appId: "1:805516133596:web:0829b15fc1931fc833a019",
   measurementId: "G-SPQL9KXK54"
 })
-// Export database for use elsewhere
 export const database = getFirestore(firebaseApp);
 
 export default createStore({
@@ -35,7 +34,6 @@ export default createStore({
     getPostsByCategory ({ commit }, category) {
       const postsQuery = query(collection(database, "posts"), where("category", "==", category))
       onSnapshot(postsQuery, (querySnapshot) => {
-        // For each post document, append to new array.
         const posts = []
         querySnapshot.forEach((doc) => {
           // We have to document id for reference reasons
