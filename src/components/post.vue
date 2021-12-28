@@ -89,11 +89,13 @@ export default {
 }
 
 .view-post-button {
+  color: $text-color;
   background-color: transparent;
   border: none;
   position: absolute;
   right: 0;
-  top: 25%;
+  top: 0;
+  font-size: 1rem;
 }
 
 .view-post-button:hover {
