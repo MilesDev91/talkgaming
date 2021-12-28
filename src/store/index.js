@@ -1,25 +1,16 @@
 import { createStore } from 'vuex'
 
 // Setup firestore database reference
-import { initializeApp } from 'firebase/app'
-import { doc, where, getFirestore, query, onSnapshot, collection, getDocs } from 'firebase/firestore'
-const firebaseApp = initializeApp({
-  apiKey: "AIzaSyDeY4ERVmHTigYU4UUb_xletCptx14tCSI",
-  authDomain: "talk-gaming.firebaseapp.com",
-  projectId: "talk-gaming",
-  storageBucket: "talk-gaming.appspot.com",
-  messagingSenderId: "805516133596",
-  appId: "1:805516133596:web:0829b15fc1931fc833a019",
-  measurementId: "G-SPQL9KXK54"
-})
-export const database = getFirestore(firebaseApp);
+import { doc, where, query, onSnapshot, collection, getDocs } from 'firebase/firestore'
+import { database } from '../main';
 
 export default createStore({
   // TODO: Modularize store
   state: {
     // TODO: Manage games in database
     categories: [],
-    posts: []
+    posts: [],
+    user: null
   },
   mutations: {
     setPosts (state, posts) {
@@ -27,6 +18,9 @@ export default createStore({
     },
     setCategories (state, categories) {
       state.categories = categories
+    },
+    setUser (state, user) {
+      state.user = user
     }
   },
   actions: {
