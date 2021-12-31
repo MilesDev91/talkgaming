@@ -7,6 +7,8 @@
         :key="index"
         class="category"
         @click="routeTo(category.title)"
+        tabindex="0"
+        @keyup.enter="routeTo(category.title)"
       >
         <div class="darken-container"></div>
         <img
@@ -38,13 +40,11 @@ export default {
     const router = useRouter();
     const store = useStore();
 
-    // Setup categories
     store.dispatch("getCategories");
 
     // Store mappings
     const { categories } = useState(["categories"]);
 
-    // Functions
     const routeTo = (category) => {
       router.push({ name: "Category", params: { category: category } });
     };

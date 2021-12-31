@@ -1,6 +1,6 @@
 /* COLOR SCHEME */
-$body-background: rgb(232, 241, 240);
-$app-background: #a8bcdd;
+$body-background: rgb(246, 251, 251);
+$app-background: #dce9fd;
 $text-color: #2c3e50;
 $nav-background-color: rgb(103, 108, 112);
 $nav-link-active: rgb(215, 219, 223);
@@ -64,4 +64,9 @@ button:hover {
     margin: 0 auto;
     box-shadow: 0px 0px 4px black;
   }
+}
+
+.user-form {
+  width: 50%;
+  margin: 2rem auto;
 }

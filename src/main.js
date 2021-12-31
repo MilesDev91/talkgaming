@@ -12,23 +12,31 @@ export const firebaseApp = initializeApp({
 })
 export const database = getFirestore(firebaseApp);
 
+
 import '@babel/polyfill'
 import 'mutationobserver-shim'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-
-const app = createApp(App)
-
-// Component import/registration
+import { onAuthStateChanged, getAuth } from 'firebase/auth'
 import header from './components/shared/header.vue'
 import post from './components/post.vue'
 import userForm from './components/userForm.vue'
-app.component('u-header', header)
-app.component('u-post', post)
-app.component('u-user-form', userForm)
+import alert from './components/alert.vue'
+import breadcrumbs from './components/shared/breadcrumbs.vue'
 
-// app initialization
-app.use(store).use(router).mount('#app')
+let app;
+onAuthStateChanged(getAuth(), () => {
+  if (!app) {
+    app = createApp(App)
+    app.component('u-header', header)
+    app.component('u-post', post)
+    app.component('u-user-form', userForm)
+    app.component('u-alert', alert)
+    app.component('u-breadcrumbs', breadcrumbs)
+
+    app.use(store).use(router).mount('#app')
+  }
+})
 

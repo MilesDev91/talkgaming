@@ -1,5 +1,13 @@
 <template>
-  <div class="user-form">
+  <form @submit.prevent class="user-form">
+    <!-- TODO: Implement usernames in login (currently used for display, not authentication) -->
+    <input
+      v-if="props.isNewUser"
+      v-model="input.username"
+      type="text"
+      name="username"
+      placeholder="Username"
+    />
     <input type="text" name="email" v-model="input.email" placeholder="Email" />
     <input
       type="password"
@@ -8,14 +16,34 @@
       placeholder="Password"
     />
     <!-- Register New User -->
-    <button
-      v-if="props.isNewUser"
-      @click="this.$emit('createUser', input.email, input.password)"
-    >
-      Register
-    </button>
+    <div class="user-button" v-if="props.isNewUser">
+      <button
+        type="submit"
+        @click.prevent="
+          this.$emit('create-user', input.email, input.password, input.username)
+        "
+      >
+        Register
+      </button>
+      <p>
+        Already have an account? Login
+        <router-link to="/login">here.</router-link>
+      </p>
+    </div>
     <!-- Login new user -->
-  </div>
+    <div class="user-button" v-else>
+      <button
+        type="submit"
+        @click="this.$emit('login-user', input.email, input.password)"
+      >
+        Login
+      </button>
+      <p>
+        Don't have an account? Create one
+        <router-link to="/register">here.</router-link>
+      </p>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -24,7 +52,7 @@ export default {
     isNewUser: { type: Boolean },
   },
   setup(props) {
-    var input = { email: "", password: "" };
+    var input = { email: "", password: "", username: "" };
 
     return {
       input,
@@ -37,11 +65,6 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
 
-.user-form {
-  display: flex;
-  flex-direction: column;
-}
-
 input {
   margin: 0.5rem 0;
 }
@@ -49,5 +72,15 @@ input {
 button {
   align-self: flex-start;
   background-color: $primary-button;
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-button {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

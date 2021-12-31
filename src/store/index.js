@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 // Setup firestore database reference
 import { doc, where, query, onSnapshot, collection, getDocs } from 'firebase/firestore'
-import { database } from '../main';
+import { database } from '@/main';
 
 export default createStore({
   // TODO: Modularize store
@@ -10,7 +10,6 @@ export default createStore({
     // TODO: Manage games in database
     categories: [],
     posts: [],
-    user: null
   },
   mutations: {
     setPosts (state, posts) {
@@ -18,9 +17,6 @@ export default createStore({
     },
     setCategories (state, categories) {
       state.categories = categories
-    },
-    setUser (state, user) {
-      state.user = user
     }
   },
   actions: {
@@ -30,7 +26,6 @@ export default createStore({
       onSnapshot(postsQuery, (querySnapshot) => {
         const posts = []
         querySnapshot.forEach((doc) => {
-          // We have to document id for reference reasons
           let post = {
             ...doc.data(),
             id: doc.id
