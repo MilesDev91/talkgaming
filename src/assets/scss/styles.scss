@@ -56,6 +56,13 @@ button:hover {
   color: $text-color;
   background-color: $app-background;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-form {
+  width: 80%;
+  margin: 0 auto;
 }
 
 @media (min-width: 500px) {
@@ -64,9 +71,8 @@ button:hover {
     margin: 0 auto;
     box-shadow: 0px 0px 4px black;
   }
-}
 
-.user-form {
-  width: 50%;
-  margin: 2rem auto;
+  .user-form {
+    width: 60%;
+  }
 }
