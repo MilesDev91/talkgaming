@@ -20,7 +20,6 @@ export default {
     const auth = getAuth();
 
     function createUser(email, password, username) {
-      console.log(email, password);
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;

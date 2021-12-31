@@ -40,8 +40,6 @@ export default {
       }
       pathArray.shift();
       displayArray.shift();
-      console.log("display", displayArray);
-      console.log("path", pathArray);
     }
 
     watch(router.currentRoute, breadcrumbPath);
