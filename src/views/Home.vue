@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>Choose a category</h1>
     <div class="categories">
       <div
         v-for="(category, index) in categories"

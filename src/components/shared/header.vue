@@ -2,8 +2,8 @@
   <div class="nav">
     <a class="nav-logo" href="/">Talk Gaming</a>
     <ul class="nav-links">
-      <!-- The logout button is a p elements instead of a button to preserve the inline behavior of the navbar -->
-      <li v-if="currentUser != null" @click="logout">Logout</li>
+      <!-- The logout button is a p element instead of a button to preserve the inline behavior of the navbar -->
+      <li v-if="currentUser != null" @click="logout"><p>Logout</p></li>
       <li v-else><router-link to="/login">Sign in</router-link></li>
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="/about">About</router-link></li>
@@ -90,6 +90,6 @@ export default {
 
 .nav-links a.router-link-exact-active {
   background-color: $nav-link-active;
-  color: $text-color;
+  color: $dark-text-color;
 }
 </style>
