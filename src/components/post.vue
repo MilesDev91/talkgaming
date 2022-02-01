@@ -8,10 +8,10 @@
       >
         View
       </button>
-      <h4 @click="$emit('goToRoute')">{{ title }}</h4>
+      <h3 @click="$emit('goToRoute')">{{ title }}</h3>
     </div>
-    <p v-if="!isGrouped" class="content">{{ content }}</p>
-    <p v-else class="content-grouped">{{ content }}</p>
+    <p v-if="!isGrouped" class="content content-alone">{{ content }}</p>
+    <p v-else class="content content-grouped">{{ content }}</p>
   </div>
 </template>
 
@@ -57,13 +57,13 @@ export default {
 }
 
 .title {
-  border-bottom: 1px solid gray;
+  background-color: $app-background;
   width: 100%;
   display: flex;
   position: relative;
 }
 
-.title h4 {
+.title h3 {
   padding: 0.4rem;
   margin: 0;
 }
@@ -73,18 +73,17 @@ export default {
 }
 
 .content {
-  background-color: rgb(226, 224, 224);
+  background-color: $post-content-color;
   text-align: start;
   padding: 0.4rem;
   margin: 0;
+}
+
+.content-alone {
   min-height: 5rem;
 }
 
 .content-grouped {
-  background-color: rgb(226, 224, 224);
-  text-align: start;
-  padding: 0.4rem;
-  margin: 0;
   height: 2.5rem;
 }
 

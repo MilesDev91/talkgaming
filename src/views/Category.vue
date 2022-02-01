@@ -1,6 +1,7 @@
 <template>
   <div class="category-container">
     <h2>Posts for {{ category }} games</h2>
+    <button @click="routeTo()" class="create-post-button">+ New Post</button>
     <div class="posts-container">
       <div class="post" v-for="(post, index) in filteredPosts" :key="index">
         <u-post
@@ -27,15 +28,12 @@ export default {
 
     const category = route.params.category;
 
-    // Setup posts in store
     store.dispatch("getPostsByCategory", category);
 
-    // This filters post to only those in this category.
     const filteredPosts = computed(() => {
       return store.state.posts;
     });
 
-    // Goes to specific post.
     function goToPost(post) {
       router.push({
         name: "Post",
@@ -47,10 +45,15 @@ export default {
       });
     }
 
+    const routeTo = () => {
+      router.push({ name: "CreatePost" });
+    };
+
     return {
       filteredPosts,
       category,
       goToPost,
+      routeTo,
     };
   },
 };
@@ -72,12 +75,24 @@ export default {
   margin: 1rem 0;
   display: flex;
   overflow: hidden;
-  box-shadow: 2px 2px 5px rgb(56, 56, 56);
+}
+
+.create-post-button {
+  position: sticky;
+  background-color: $primary-button;
 }
 
 @media (min-width: 500px) {
   .posts-container {
     max-width: 60%;
   }
+}
+
+.post {
+  border-top: 2px solid $post-border;
+}
+
+.post:last-child {
+  border-bottom: 2px solid $post-border;
 }
 </style>

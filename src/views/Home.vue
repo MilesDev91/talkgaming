@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>Choose a category</h1>
     <div class="categories">
       <div
         v-for="(category, index) in categories"
@@ -67,7 +66,7 @@ export default {
 }
 
 .categories {
-  background-color: $forum-contents-background-color;
+  background-color: $post-content-color;
   margin: 4rem auto;
   display: grid;
   grid-template-columns: 8rem 8rem;
@@ -76,10 +75,9 @@ export default {
   grid-auto-rows: 8rem;
   overflow: hidden;
 }
-@media (min-width: 500px) {
-  .categories {
-    flex-direction: row;
-  }
+
+.category:nth-child(odd) {
+  border-right: 1px solid gray;
 }
 
 .category {
@@ -117,7 +115,35 @@ export default {
   cursor: pointer;
 }
 
-.category:nth-child(odd) {
-  border-right: 1px solid gray;
+@media (min-width: 500px) {
+  .categories {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    margin-left: 2rem;
+    width: 20%;
+    border-radius: 0.5rem;
+  }
+
+  .category {
+    height: 50px;
+    border-bottom: 1px solid black;
+  }
+
+  .darken-container {
+    display: none;
+  }
+
+  .category-image {
+    display: none;
+  }
+
+  .category:nth-child(odd) {
+    border-right: none;
+  }
+
+  .category:last-child {
+    border-bottom: none;
+  }
 }
 </style>

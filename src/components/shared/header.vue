@@ -90,6 +90,6 @@ export default {
 
 .nav-links a.router-link-exact-active {
   background-color: $nav-link-active;
-  color: $text-color;
+  color: $dark-text-color;
 }
 </style>
