@@ -35,7 +35,8 @@ export default {
   margin: 1rem auto;
   width: 80%;
   overflow: visible;
-  box-shadow: 2px 2px 5px rgb(56, 56, 56);
+  border-top: 2px solid $post-border;
+  border-bottom: 2px solid $post-border;
 }
 
 @media (min-width: 500px) {

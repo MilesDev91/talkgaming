@@ -1,14 +1,21 @@
 /* COLOR SCHEME */
-$body-background: rgb(246, 251, 251);
-$app-background: #dce9fd;
-$text-color: #2c3e50;
+$body-background: rgb(153, 153, 153);
+$app-background: #73767a;
+$text-color: #f2f9ff;
 $nav-background-color: rgb(103, 108, 112);
 $nav-link-active: rgb(215, 219, 223);
 $nav-text-color: rgb(247, 254, 255);
+$dark-text-color: rgb(103, 108, 112);
 $forum-contents-background-color: aliceblue;
 $primary-button: rgb(57, 75, 78);
+$dark-highlight: rgb(55, 50, 61);
 
-
+/* Post color */
+$post-title-color: white;
+$post-content-color: rgb(94, 94, 94);
+$post-border: rgb(168, 168, 168);
+$post-title-background-color: rgb(172, 253, 253);
+$post-title-border-color: rgb(138, 197, 177);
 
 body {
   background-color: $body-background;
@@ -16,7 +23,7 @@ body {
 }
 
 p {
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 label {
@@ -25,22 +32,49 @@ label {
 
 input {
   font-size: 1.1rem;
-  background-color: transparent;
+  background-color: $post-content-color;
   border: none;
   border-bottom: 1px solid $text-color;
+  color: $text-color;
 }
 
 input:focus {
   outline: none;
   box-shadow: 0 0 5px rgb(55, 50, 61);
-  background-color: $body-background;
+  background-color: $dark-highlight;
+}
+
+input::placeholder {
+  color: $text-color;
+  opacity: 0.6;
+}
+
+textarea {
+  background-color: $post-content-color;
+  color: $text-color;
+  border: 1px solid $text-color;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgb(55, 50, 61);
+  background-color: $dark-highlight;
+}
+
+textarea::placeholder {
+  color: $text-color;
+  opacity: 0.7;
+}
+
+h3 {
+  font-size: 1rem;
 }
 
 button {
   color: $nav-text-color;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   border: none;
-  padding: .4rem;
+  padding: 0.4rem;
   font-size: 1.2rem;
 }
 
@@ -55,7 +89,7 @@ button:hover {
   text-align: center;
   color: $text-color;
   background-color: $app-background;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
