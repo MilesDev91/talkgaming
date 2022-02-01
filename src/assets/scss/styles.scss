@@ -8,6 +8,7 @@ $nav-text-color: rgb(247, 254, 255);
 $dark-text-color: rgb(103, 108, 112);
 $forum-contents-background-color: aliceblue;
 $primary-button: rgb(57, 75, 78);
+$dark-highlight: rgb(55, 50, 61);
 
 /* Post color */
 $post-title-color: white;
@@ -31,15 +32,38 @@ label {
 
 input {
   font-size: 1.1rem;
-  background-color: transparent;
+  background-color: $post-content-color;
   border: none;
   border-bottom: 1px solid $text-color;
+  color: $text-color;
 }
 
 input:focus {
   outline: none;
   box-shadow: 0 0 5px rgb(55, 50, 61);
-  background-color: $body-background;
+  background-color: $dark-highlight;
+}
+
+input::placeholder {
+  color: $text-color;
+  opacity: 0.6;
+}
+
+textarea {
+  background-color: $post-content-color;
+  color: $text-color;
+  border: 1px solid $text-color;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgb(55, 50, 61);
+  background-color: $dark-highlight;
+}
+
+textarea::placeholder {
+  color: $text-color;
+  opacity: 0.7;
 }
 
 h3 {
@@ -65,7 +89,7 @@ button:hover {
   text-align: center;
   color: $text-color;
   background-color: $app-background;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
