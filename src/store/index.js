@@ -54,10 +54,10 @@ export default createStore({
       });
     },
     getPostById({ commit }, id) {
-      onSnapshot(doc(database, "posts", id), async (doc) => {
-        let user = await getDoc(doc(database, "users", doc.data().userid));
+      onSnapshot(doc(database, "posts", id), async (snapshot) => {
+        let user = await getDoc(doc(database, "users", snapshot.data().userid));
         let post = {
-          ...doc.data(),
+          ...snapshot.data(),
           id,
           author: user.data().username,
         };
