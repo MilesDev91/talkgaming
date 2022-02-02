@@ -17,36 +17,37 @@
 
 <script>
 import { getAuth } from "@firebase/auth";
-import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
+import { addDoc, collection } from "firebase/firestore";
+import { database } from "@/main";
 
 export default {
   name: "CreatePost",
   setup() {
     var input = { title: "", content: "" };
-    const store = useStore();
     const route = useRoute();
     const router = useRouter();
 
     const createPost = async () => {
       const user = getAuth().currentUser;
-      store
-        .dispatch("createPost", {
+      var id;
+      const post = {
+        category: route.params.category,
+        content: input.content,
+        title: input.title,
+        userid: user.uid,
+      };
+      await addDoc(collection(database, "posts"), post).then((res) => {
+        id = res.id;
+      });
+      router.push({
+        name: "Post",
+        params: {
           title: input.title,
-          content: input.content,
-          userid: user.uid,
           category: route.params.category,
-        })
-        .then((id) => {
-          router.push({
-            name: "Post",
-            params: {
-              title: input.title,
-              category: route.params.category,
-              id,
-            },
-          });
-        });
+          id,
+        },
+      });
     };
 
     return {

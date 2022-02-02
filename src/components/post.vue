@@ -11,7 +11,7 @@
       <h3 @click="$emit('goToRoute')">{{ title }}</h3>
     </div>
     <p v-if="!isGrouped" class="content content-alone">{{ content }}</p>
-    <p v-else class="content content-grouped">{{ content }}</p>
+    <p v-else class="content">by: {{ author }}</p>
   </div>
 </template>
 
@@ -23,6 +23,7 @@ export default {
     post: {
       title: String,
       content: String,
+      author: String,
     },
     grouped: {
       type: Boolean,
@@ -36,10 +37,13 @@ export default {
     const content = computed(() => {
       return props.post.content;
     });
+    const author = computed(() => {
+      return props.post.author;
+    });
     const isGrouped = computed(() => {
       return props.grouped;
     });
-    return { title, content, isGrouped };
+    return { title, content, isGrouped, author };
   },
 };
 </script>
@@ -81,10 +85,6 @@ export default {
 
 .content-alone {
   min-height: 5rem;
-}
-
-.content-grouped {
-  height: 2.5rem;
 }
 
 .view-post-button {

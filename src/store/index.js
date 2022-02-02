@@ -8,7 +8,7 @@ import {
   onSnapshot,
   collection,
   getDocs,
-  addDoc,
+  getDoc,
 } from "firebase/firestore";
 import { database } from "@/main";
 
@@ -31,28 +31,35 @@ export default createStore({
     },
   },
   actions: {
-    getPostsByCategory({ commit }, category) {
+    async getPostsByCategory({ commit }, category) {
+      commit("setPosts", []);
       const postsQuery = query(
         collection(database, "posts"),
         where("category", "==", category)
       );
-      onSnapshot(postsQuery, (querySnapshot) => {
-        const posts = [];
-        querySnapshot.forEach((doc) => {
+      onSnapshot(postsQuery, async (querySnapshot) => {
+        let posts = [];
+        for (const snapshot of querySnapshot.docs) {
+          let user = await getDoc(
+            doc(database, "users", snapshot.data().userid)
+          );
           let post = {
-            ...doc.data(),
-            id: doc.id,
+            ...snapshot.data(),
+            id: snapshot.id,
+            author: user.data().username,
           };
           posts.push(post);
-        });
+        }
         commit("setPosts", posts);
       });
     },
     getPostById({ commit }, id) {
-      onSnapshot(doc(database, "posts", id), (doc) => {
+      onSnapshot(doc(database, "posts", id), async (doc) => {
+        let user = await getDoc(doc(database, "users", doc.data().userid));
         let post = {
           ...doc.data(),
           id,
+          author: user.data().username,
         };
         commit("setPosts", post);
       });
@@ -67,20 +74,6 @@ export default createStore({
         categories.push(category);
       });
       commit("setCategories", categories);
-    },
-    async createPost({ commit }, data) {
-      var id;
-      const post = {
-        category: data.category,
-        content: data.content,
-        title: data.title,
-        userid: data.userid,
-      };
-      await addDoc(collection(database, "posts"), post).then((res) => {
-        commit("addPost", post);
-        id = res.id;
-      });
-      return id;
     },
   },
   modules: {},
