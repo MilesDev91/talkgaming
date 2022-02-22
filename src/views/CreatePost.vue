@@ -18,7 +18,7 @@
 <script>
 import { getAuth } from "@firebase/auth";
 import { useRoute, useRouter } from "vue-router";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { database } from "@/main";
 
 export default {
@@ -36,6 +36,8 @@ export default {
         content: input.content,
         title: input.title,
         userid: user.uid,
+        commentCount: 0,
+        created: Timestamp.now(),
       };
       await addDoc(collection(database, "posts"), post).then((res) => {
         id = res.id;

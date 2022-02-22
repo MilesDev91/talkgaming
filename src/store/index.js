@@ -7,8 +7,11 @@ import {
   query,
   onSnapshot,
   collection,
+  addDoc,
   getDocs,
   getDoc,
+  setDoc,
+  Timestamp,
 } from "firebase/firestore";
 import { database } from "@/main";
 
@@ -18,6 +21,7 @@ export default createStore({
     // TODO: Manage games in database
     categories: [],
     posts: [],
+    comments: [],
   },
   mutations: {
     setPosts(state, posts) {
@@ -28,6 +32,12 @@ export default createStore({
     },
     addPost(state, post) {
       state.posts.push(post);
+    },
+    setComments(state, comments) {
+      state.comments = comments;
+    },
+    addComment(state, comment) {
+      state.comments.push(comment);
     },
   },
   actions: {
@@ -47,13 +57,14 @@ export default createStore({
             ...snapshot.data(),
             id: snapshot.id,
             author: user.data().username,
+            created: Timestamp.now(),
           };
           posts.push(post);
         }
         commit("setPosts", posts);
       });
     },
-    getPostById({ commit }, id) {
+    async getPostById({ commit }, id) {
       onSnapshot(doc(database, "posts", id), async (snapshot) => {
         let user = await getDoc(doc(database, "users", snapshot.data().userid));
         let post = {
@@ -74,6 +85,35 @@ export default createStore({
         categories.push(category);
       });
       commit("setCategories", categories);
+    },
+    async createComment({ commit }, { postId, parentId, author, content }) {
+      const comment = {
+        postId,
+        parentId,
+        author,
+        content,
+        created: Timestamp.now(),
+      };
+      await addDoc(collection(database, "comments"), comment);
+      await setDoc(
+        doc(database, "posts", postId),
+        { commentCount: this.commentCount + 1 },
+        { merge: true }
+      );
+      commit("addComment", comment);
+    },
+    async getComments({ commit }, postId) {
+      onSnapshot(
+        collection(database, "comments"),
+        where("parentId", "==", postId),
+        async (snapshot) => {
+          const comments = [];
+          snapshot.forEach((doc) => {
+            comments.push(doc.data());
+          });
+          commit("setComments", comments);
+        }
+      );
     },
   },
   modules: {},
