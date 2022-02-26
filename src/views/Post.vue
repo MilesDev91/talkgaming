@@ -1,5 +1,7 @@
 <template>
-  <u-post :post="post"></u-post>
+  <u-post :post="post" />
+  <button @click="commentFormVisible = !commentFormVisible">+ Comment</button>
+  <u-comment-form :isVisible="commentFormVisible" />
 </template>
 
 <script>
@@ -18,13 +20,21 @@ export default {
       return store.state.posts;
     });
 
-    return { post };
+    const commentFormVisible = false;
+
+    return { post, commentFormVisible };
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
+
+button {
+  width: 100px;
+  font-size: 0.8rem;
+  margin: 0 auto 1rem auto;
+}
 
 .post-container {
   background-color: $forum-contents-background-color;

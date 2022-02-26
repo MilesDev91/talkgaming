@@ -1,0 +1,39 @@
+<template>
+  <form v-if="props.isVisible" @submit.prevent class="comment-form">
+    <textarea
+      name="comment"
+      id="comment"
+      cols="30"
+      rows="10"
+      v-model="input.comment"
+    />
+    <div>
+      <button
+        type="submit"
+        @click.prevent="this.$emit('create-comment', input.comment)"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</template>
+
+<script>
+export default {
+  props: {
+    isVisible: { type: Boolean, default: false },
+  },
+  setup(props) {
+    var input = { comment: "" };
+
+    return {
+      input,
+      props,
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/styles.scss";
+</style>

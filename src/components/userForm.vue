@@ -71,7 +71,6 @@ input {
 
 button {
   align-self: flex-start;
-  background-color: $primary-button;
 }
 
 .user-form {
