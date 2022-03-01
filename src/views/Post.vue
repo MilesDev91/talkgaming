@@ -1,13 +1,19 @@
 <template>
   <u-post :post="post" />
   <button @click="commentFormVisible = !commentFormVisible">+ Comment</button>
-  <u-comment-form :isVisible="commentFormVisible" />
+  <u-comment-form
+    @create-comment="createComment(comment)"
+    :isVisible="commentFormVisible"
+  />
 </template>
 
 <script>
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { computed } from "vue";
+import { getAuth } from "firebase/auth";
+import { Timestamp } from "firebase/firestore";
+import { firebaseCreateComment } from "../helpers/firebase";
 
 export default {
   name: "Post",
@@ -20,9 +26,27 @@ export default {
       return store.state.posts;
     });
 
+    const createComment = async (commentText) => {
+      const user = getAuth().currentUser;
+
+      const comment = {
+        postId: this.post.id,
+        author: user.uid,
+        content: commentText,
+        created: Timestamp.now(),
+        parentId: null,
+      };
+
+      firebaseCreateComment(comment);
+    };
+
     const commentFormVisible = false;
 
-    return { post, commentFormVisible };
+    return {
+      post,
+      commentFormVisible,
+      createComment,
+    };
   },
 };
 </script>

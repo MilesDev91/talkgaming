@@ -22,6 +22,10 @@
 export default {
   props: {
     isVisible: { type: Boolean, default: false },
+    postId: String,
+    parentId: String,
+    author: String,
+    created: Date,
   },
   setup(props) {
     var input = { comment: "" };
