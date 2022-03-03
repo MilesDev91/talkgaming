@@ -7,10 +7,8 @@ import {
   query,
   onSnapshot,
   collection,
-  addDoc,
   getDocs,
   getDoc,
-  setDoc,
   Timestamp,
 } from "firebase/firestore";
 import { database } from "@/main";
@@ -35,9 +33,6 @@ export default createStore({
     },
     setComments(state, comments) {
       state.comments = comments;
-    },
-    addComment(state, comment) {
-      state.comments.push(comment);
     },
   },
   actions: {
@@ -86,31 +81,12 @@ export default createStore({
       });
       commit("setCategories", categories);
     },
-    async createComment({ commit }, { postId, parentId, author, content }) {
-      const comment = {
-        postId,
-        parentId,
-        author,
-        content,
-        created: Timestamp.now(),
-      };
-      await addDoc(collection(database, "comments"), comment);
-      await setDoc(
-        doc(database, "posts", postId),
-        { commentCount: this.commentCount + 1 },
-        { merge: true }
-      );
-      commit("addComment", comment);
-    },
     async getComments({ commit }, postId) {
       onSnapshot(
         collection(database, "comments"),
         where("parentId", "==", postId),
         async (snapshot) => {
-          const comments = [];
-          snapshot.forEach((doc) => {
-            comments.push(doc.data());
-          });
+          const comments = snapshot.docs();
           commit("setComments", comments);
         }
       );

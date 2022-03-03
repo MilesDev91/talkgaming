@@ -1,30 +1,76 @@
 <template>
-  <u-post :post="post"></u-post>
+  <u-post :post="post" />
+  <button @click="toggleCommentForm()">+ Comment</button>
+  <u-comment-form
+    @create-comment="createComment"
+    :isVisible="commentFormVisible"
+  />
 </template>
 
 <script>
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import { getAuth } from "firebase/auth";
+import { Timestamp } from "firebase/firestore";
+import { firebaseCreateComment } from "../helpers/firebase";
 
 export default {
   name: "Post",
   setup() {
     const route = useRoute();
     const store = useStore();
+    const user = getAuth().currentUser;
 
     const post = computed(() => {
       store.dispatch("getPostById", route.params.id);
       return store.state.posts;
     });
 
-    return { post };
+    const createComment = async (commentText) => {
+      const comment = {
+        postId: post.value.id,
+        author: user.uid,
+        content: commentText,
+        created: Timestamp.now(),
+        parentId: null,
+      };
+
+      firebaseCreateComment(comment)
+        .then((res) => alert(res))
+        .catch((error) => console.error(error));
+
+      commentFormVisible.value = !commentFormVisible.value;
+    };
+
+    const commentFormVisible = ref(false);
+
+    const toggleCommentForm = () => {
+      if (user) {
+        commentFormVisible.value = !commentFormVisible.value;
+      } else {
+        alert("You must log in to leave a comment");
+      }
+    };
+
+    return {
+      post,
+      commentFormVisible,
+      createComment,
+      toggleCommentForm,
+    };
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
+
+button {
+  width: 100px;
+  font-size: 0.8rem;
+  margin: 0 auto 1rem auto;
+}
 
 .post-container {
   background-color: $forum-contents-background-color;
