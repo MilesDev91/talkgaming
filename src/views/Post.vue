@@ -2,7 +2,7 @@
   <u-post :post="post" />
   <button @click="toggleCommentForm()">+ Comment</button>
   <u-comment-form
-    @create-comment="createComment(comment)"
+    @create-comment="createComment"
     :isVisible="commentFormVisible"
   />
 </template>
@@ -10,7 +10,7 @@
 <script>
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { getAuth } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { firebaseCreateComment } from "../helpers/firebase";
@@ -20,7 +20,7 @@ export default {
   setup() {
     const route = useRoute();
     const store = useStore();
-    const user = getAuth.currentUser;
+    const user = getAuth().currentUser;
 
     const post = computed(() => {
       store.dispatch("getPostById", route.params.id);
@@ -29,21 +29,25 @@ export default {
 
     const createComment = async (commentText) => {
       const comment = {
-        postId: this.post.id,
+        postId: post.value.id,
         author: user.uid,
         content: commentText,
         created: Timestamp.now(),
         parentId: null,
       };
 
-      firebaseCreateComment(comment);
+      firebaseCreateComment(comment)
+        .then((res) => alert(res))
+        .catch((error) => console.error(error));
+
+      commentFormVisible.value = !commentFormVisible.value;
     };
 
-    let commentFormVisible = false;
+    const commentFormVisible = ref(false);
 
     const toggleCommentForm = () => {
       if (user) {
-        commentFormVisible = !commentFormVisible;
+        commentFormVisible.value = !commentFormVisible.value;
       } else {
         alert("You must log in to leave a comment");
       }
