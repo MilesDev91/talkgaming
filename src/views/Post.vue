@@ -1,6 +1,6 @@
 <template>
   <u-post :post="post" />
-  <button @click="commentFormVisible = !commentFormVisible">+ Comment</button>
+  <button @click="toggleCommentForm()">+ Comment</button>
   <u-comment-form
     @create-comment="createComment(comment)"
     :isVisible="commentFormVisible"
@@ -20,6 +20,7 @@ export default {
   setup() {
     const route = useRoute();
     const store = useStore();
+    const user = getAuth.currentUser;
 
     const post = computed(() => {
       store.dispatch("getPostById", route.params.id);
@@ -27,8 +28,6 @@ export default {
     });
 
     const createComment = async (commentText) => {
-      const user = getAuth().currentUser;
-
       const comment = {
         postId: this.post.id,
         author: user.uid,
@@ -40,12 +39,21 @@ export default {
       firebaseCreateComment(comment);
     };
 
-    const commentFormVisible = false;
+    let commentFormVisible = false;
+
+    const toggleCommentForm = () => {
+      if (user) {
+        commentFormVisible = !commentFormVisible;
+      } else {
+        alert("You must log in to leave a comment");
+      }
+    };
 
     return {
       post,
       commentFormVisible,
       createComment,
+      toggleCommentForm,
     };
   },
 };
