@@ -21,6 +21,7 @@ import store from "./store";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import header from "./components/shared/header.vue";
 import post from "./components/post.vue";
+import comment from "./components/comment.vue";
 import userForm from "./components/userForm.vue";
 import commentForm from "./components/commentForm.vue";
 import alert from "./components/alert.vue";
@@ -32,6 +33,7 @@ onAuthStateChanged(getAuth(), () => {
     app = createApp(App);
     app.component("u-header", header);
     app.component("u-post", post);
+    app.component("u-comment", comment);
     app.component("u-user-form", userForm);
     app.component("u-comment-form", commentForm);
     app.component("u-alert", alert);

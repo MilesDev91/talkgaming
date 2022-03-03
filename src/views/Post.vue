@@ -5,12 +5,15 @@
     @create-comment="createComment"
     :isVisible="commentFormVisible"
   />
+  <div v-for="comment in comments" :key="comment.id">
+    <u-comment :comment="comment" />
+  </div>
 </template>
 
 <script>
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { getAuth } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { firebaseCreateComment } from "../helpers/firebase";
@@ -22,9 +25,22 @@ export default {
     const store = useStore();
     const user = getAuth().currentUser;
 
+    store.dispatch("getPostById", route.params.id);
+
     const post = computed(() => {
-      store.dispatch("getPostById", route.params.id);
       return store.state.posts;
+    });
+
+    watch(
+      () => store.state.posts,
+      () => {
+        store.dispatch("getComments", post.value.id);
+      }
+    );
+
+    const comments = computed(() => {
+      console.log(store.state.comments);
+      return store.state.comments;
     });
 
     const createComment = async (commentText) => {
@@ -58,6 +74,7 @@ export default {
       commentFormVisible,
       createComment,
       toggleCommentForm,
+      comments,
     };
   },
 };

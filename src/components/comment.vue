@@ -1,9 +1,20 @@
 <template>
-  <div>hello</div>
+  <div>{{ comment }}</div>
 </template>
 
 <script>
 export default {
-  setup() {},
+  props: {
+    comment: {
+      postId: String,
+      parentId: String,
+      author: String,
+      created: Date,
+      content: String,
+    },
+  },
+  setup(props) {
+    return props;
+  },
 };
 </script>

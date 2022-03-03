@@ -82,14 +82,20 @@ export default createStore({
       commit("setCategories", categories);
     },
     async getComments({ commit }, postId) {
-      onSnapshot(
+      const q = query(
         collection(database, "comments"),
-        where("parentId", "==", postId),
-        async (snapshot) => {
-          const comments = snapshot.docs();
-          commit("setComments", comments);
-        }
+        where("postId", "==", postId)
       );
+
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        let comments = [];
+        querySnapshot.forEach((doc) => {
+          comments.push(doc.data());
+        });
+        commit("setComments", comments);
+      });
+
+      return unsubscribe;
     },
   },
   modules: {},
