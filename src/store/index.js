@@ -87,11 +87,15 @@ export default createStore({
         where("postId", "==", postId)
       );
 
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const unsubscribe = onSnapshot(q, async (querySnapshot) => {
         let comments = [];
-        querySnapshot.forEach((doc) => {
-          comments.push(doc.data());
+        querySnapshot.forEach((document) => {
+          comments.push(document.data());
         });
+        for (let comment of comments) {
+          let author = await getDoc(doc(database, "users", comment.author));
+          comment.author = author.data().username;
+        }
         commit("setComments", comments);
       });
 
