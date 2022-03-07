@@ -1,10 +1,8 @@
 <template>
-  <h1>Login to your account</h1>
-  <u-user-form
-    :isNewUser="false"
-    @login-user="loginUser"
-    class="user-form"
-  ></u-user-form>
+  <u-page-container width="60%">
+    <h1>Login to your account</h1>
+    <u-user-form :isNewUser="false" @login-user="loginUser"></u-user-form>
+  </u-page-container>
 </template>
 
 <script>

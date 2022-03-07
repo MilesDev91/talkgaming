@@ -1,5 +1,5 @@
 <template>
-  <div class="category-container">
+  <u-page-container width="60%">
     <h2>Posts for {{ category }} games</h2>
     <button @click="routeTo()" class="create-post-button">+ New Post</button>
     <div class="posts-container">
@@ -11,7 +11,7 @@
         ></u-post>
       </div>
     </div>
-  </div>
+  </u-page-container>
 </template>
 
 <script>
@@ -62,16 +62,9 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
 
-.category-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 1rem 0;
-}
-
 .posts-container {
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   margin: 1rem 0;
   display: flex;
   overflow: hidden;
@@ -80,12 +73,8 @@ export default {
 .create-post-button {
   position: sticky;
   background-color: $primary-button;
-}
-
-@media (min-width: 500px) {
-  .posts-container {
-    max-width: 60%;
-  }
+  width: 150px;
+  align-self: center;
 }
 
 .post {

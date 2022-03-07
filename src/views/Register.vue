@@ -1,10 +1,8 @@
 <template>
-  <h1>Create a new account</h1>
-  <u-user-form
-    isNewUser
-    @create-user="createUser"
-    class="user-form"
-  ></u-user-form>
+  <u-page-container width="60%">
+    <h1>Create a new account</h1>
+    <u-user-form isNewUser @create-user="createUser"></u-user-form>
+  </u-page-container>
 </template>
 
 <script>

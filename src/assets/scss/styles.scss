@@ -95,19 +95,10 @@ button:hover {
   flex-direction: column;
 }
 
-.user-form {
-  width: 80%;
-  margin: 0 auto;
-}
-
 @media (min-width: 500px) {
   #app {
     width: 70%;
     margin: 0 auto;
     box-shadow: 0px 0px 4px black;
-  }
-
-  .user-form {
-    width: 60%;
   }
 }

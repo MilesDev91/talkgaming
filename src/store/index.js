@@ -16,7 +16,6 @@ import { database } from "@/main";
 export default createStore({
   // TODO: Modularize store
   state: {
-    // TODO: Manage games in database
     categories: [],
     posts: [],
     comments: [],

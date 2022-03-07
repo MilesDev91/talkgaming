@@ -76,6 +76,7 @@ button {
 .user-form {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .user-button {

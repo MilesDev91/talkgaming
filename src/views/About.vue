@@ -1,7 +1,7 @@
 <template>
-  <div class="about">
+  <u-page-container width="100%" class="about">
     <h1>Attributions</h1>
-  </div>
+  </u-page-container>
 </template>
 
 <style lang="scss" scoped>

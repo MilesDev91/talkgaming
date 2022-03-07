@@ -26,6 +26,7 @@ import userForm from "./components/userForm.vue";
 import commentForm from "./components/commentForm.vue";
 import alert from "./components/alert.vue";
 import breadcrumbs from "./components/shared/breadcrumbs.vue";
+import pageContainer from "./components/pageContainer.vue";
 
 let app;
 onAuthStateChanged(getAuth(), () => {
@@ -38,6 +39,7 @@ onAuthStateChanged(getAuth(), () => {
     app.component("u-comment-form", commentForm);
     app.component("u-alert", alert);
     app.component("u-breadcrumbs", breadcrumbs);
+    app.component("u-page-container", pageContainer);
 
     app
       .use(store)

@@ -1,6 +1,10 @@
 <template>
-  <h2>{{ comment.author }}</h2>
-  <div>{{ comment.content }}</div>
+  <div class="comment">
+    <h2 class="comment-title">- {{ comment.author }}</h2>
+    <!-- TODO: Format and display date -->
+    <div class="comment-creation">{{ comment.created }}</div>
+    <div>{{ comment.content }}</div>
+  </div>
 </template>
 
 <script>
@@ -19,3 +23,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.comment {
+  margin-bottom: 1rem;
+  min-width: 200px;
+  text-align: left;
+}
+
+.comment-title {
+  margin-left: 0;
+}
+
+.comment-creation {
+  float: right;
+}
+</style>

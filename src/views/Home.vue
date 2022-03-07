@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <u-page-container width="100%">
     <div class="categories">
       <div
         v-for="(category, index) in categories"
@@ -19,7 +19,7 @@
         <div style="z-index: 2">{{ category.title }}</div>
       </div>
     </div>
-  </div>
+  </u-page-container>
 </template>
 
 <script>
@@ -58,12 +58,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
-
-.home {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
 .categories {
   background-color: $post-content-color;
