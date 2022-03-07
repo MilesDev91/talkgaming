@@ -2,7 +2,7 @@
   <div class="comment">
     <h2 class="comment-title">- {{ comment.author }}</h2>
     <!-- TODO: Format and display date -->
-    <div class="comment-creation">{{ comment.created }}</div>
+    <!-- <div class="comment-creation">{{ comment.created }}</div> -->
     <div>{{ comment.content }}</div>
   </div>
 </template>
