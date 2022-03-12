@@ -10,6 +10,7 @@ import {
   getDocs,
   getDoc,
   Timestamp,
+  orderBy,
 } from "firebase/firestore";
 import { database } from "@/main";
 
@@ -83,7 +84,8 @@ export default createStore({
     async getComments({ commit }, postId) {
       const q = query(
         collection(database, "comments"),
-        where("postId", "==", postId)
+        where("postId", "==", postId),
+        orderBy("created", "desc")
       );
 
       const unsubscribe = onSnapshot(q, async (querySnapshot) => {

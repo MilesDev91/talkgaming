@@ -1,13 +1,14 @@
 <template>
   <div class="comment">
-    <h2 class="comment-title">- {{ comment.author }}</h2>
-    <!-- TODO: Format and display date -->
-    <!-- <div class="comment-creation">{{ comment.created }}</div> -->
+    <h2 class="comment-title">- {{ comment.author }} - {{ creationDate }}</h2>
     <div>{{ comment.content }}</div>
   </div>
 </template>
 
 <script>
+import { computed } from "vue";
+import moment from "moment";
+
 export default {
   props: {
     comment: {
@@ -19,7 +20,14 @@ export default {
     },
   },
   setup(props) {
-    return props;
+    const creationDate = computed(() => {
+      return moment(props.comment.created.milliseconds).format("MMM D YY");
+    });
+
+    return {
+      props,
+      creationDate,
+    };
   },
 };
 </script>
@@ -33,9 +41,5 @@ export default {
 
 .comment-title {
   margin-left: 0;
-}
-
-.comment-creation {
-  float: right;
 }
 </style>
