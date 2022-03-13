@@ -16,6 +16,8 @@ import "@babel/polyfill";
 import "mutationobserver-shim";
 import { createApp } from "vue";
 import App from "./App.vue";
+import PrimeVue from "primevue/config";
+import Breadcrumb from "primevue/breadcrumb";
 import router from "./router";
 import store from "./store";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
@@ -27,18 +29,22 @@ import commentForm from "./components/commentForm.vue";
 import alert from "./components/alert.vue";
 import breadcrumbs from "./components/shared/breadcrumbs.vue";
 import pageContainer from "./components/pageContainer.vue";
+import "primeicons/primeicons.css";
 
 let app;
 onAuthStateChanged(getAuth(), () => {
   if (!app) {
     app = createApp(App);
+    app.use(PrimeVue);
+
+    app.component("Breadcrumb", Breadcrumb);
+    app.component("u-breadcrumbs", breadcrumbs);
     app.component("u-header", header);
     app.component("u-post", post);
     app.component("u-comment", comment);
     app.component("u-user-form", userForm);
     app.component("u-comment-form", commentForm);
     app.component("u-alert", alert);
-    app.component("u-breadcrumbs", breadcrumbs);
     app.component("u-page-container", pageContainer);
 
     app
