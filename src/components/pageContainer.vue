@@ -7,7 +7,7 @@
 <script>
 export default {
   props: {
-    width: Number,
+    width: String,
   },
   setup(props) {
     return props;

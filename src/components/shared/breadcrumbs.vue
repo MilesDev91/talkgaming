@@ -5,11 +5,13 @@
 <script>
 import { useRouter } from "vue-router";
 import { watch } from "@vue/runtime-core";
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
 
 export default {
   setup() {
     const router = useRouter();
+    const store = useStore();
 
     const home = ref({
       icon: "pi pi-home",
@@ -17,6 +19,10 @@ export default {
     });
 
     const items = ref([]);
+
+    const post = computed(() => {
+      return store.state.posts;
+    });
 
     function breadcrumbPath() {
       items.value = [];
@@ -29,12 +35,17 @@ export default {
           to: arraySection.join("/"),
         });
       }
-      items.value.shift();
 
-      console.log(items.value);
+      // check the end for a post id. replace label with name of post if so
+      if (items.value[items.value.length - 1].label.length > 15) {
+        items.value[items.value.length - 1].label = store.state.posts.title;
+      }
+
+      items.value.shift();
     }
 
     watch(router.currentRoute, breadcrumbPath);
+    watch(post, breadcrumbPath);
 
     breadcrumbPath();
     return {
