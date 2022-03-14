@@ -87,7 +87,6 @@ button:hover {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: $text-color;
   background-color: $app-background;
   min-height: 100vh;
@@ -101,7 +100,6 @@ button:hover {
 
 @media (min-width: 500px) {
   #app {
-    width: 70%;
     margin: 0 auto;
     box-shadow: 0px 0px 4px black;
   }

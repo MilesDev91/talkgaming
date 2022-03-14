@@ -1,6 +1,7 @@
 <template>
   <u-page-container width="100%">
     <div class="categories">
+      <h2>Categories</h2>
       <div
         v-for="(category, index) in categories"
         :key="index"
@@ -9,13 +10,6 @@
         tabindex="0"
         @keyup.enter="routeTo(category.title)"
       >
-        <div class="darken-container"></div>
-        <img
-          class="category-image"
-          :src="getPath(category.image)"
-          :alt="'Image for ' + category.title"
-        />
-
         <div style="z-index: 2">{{ category.title }}</div>
       </div>
     </div>
@@ -60,53 +54,17 @@ export default {
 @import "@/assets/scss/styles.scss";
 
 .categories {
-  background-color: $post-content-color;
-  margin: 4rem auto;
-  display: grid;
-  grid-template-columns: 8rem 8rem;
-  border: 1px solid black;
-  border-radius: 4rem;
-  grid-auto-rows: 8rem;
+  margin: 4rem;
   overflow: hidden;
-}
-
-.category:nth-child(odd) {
-  border-right: 1px solid gray;
 }
 
 .category {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  // Combined with overflow: hidden on parent, this hides border on bottom items.
-  margin: -0.01rem;
-  text-align: center;
-  border-bottom: 1px solid gray;
   position: relative;
   z-index: 2;
   color: white;
-}
-
-.darken-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.424);
-  z-index: 1;
-}
-
-.category-image {
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.category:hover {
   cursor: pointer;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 500px) {
@@ -116,28 +74,6 @@ export default {
     margin: 0;
     margin-left: 2rem;
     width: 20%;
-    border-radius: 0.5rem;
-  }
-
-  .category {
-    height: 50px;
-    border-bottom: 1px solid black;
-  }
-
-  .darken-container {
-    display: none;
-  }
-
-  .category-image {
-    display: none;
-  }
-
-  .category:nth-child(odd) {
-    border-right: none;
-  }
-
-  .category:last-child {
-    border-bottom: none;
   }
 }
 </style>
