@@ -19,7 +19,6 @@ export default {
 .page-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin: 0 auto;
 }
 </style>
