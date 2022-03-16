@@ -18,6 +18,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import PrimeVue from "primevue/config";
 import Breadcrumb from "primevue/breadcrumb";
+import Divider from "primevue/divider";
 import router from "./router";
 import store from "./store";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
@@ -37,6 +38,7 @@ onAuthStateChanged(getAuth(), () => {
     app = createApp(App);
     app.use(PrimeVue);
 
+    app.component("Divider", Divider);
     app.component("Breadcrumb", Breadcrumb);
     app.component("u-breadcrumbs", breadcrumbs);
     app.component("u-header", header);

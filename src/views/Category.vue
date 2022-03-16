@@ -3,7 +3,7 @@
     <h2>Posts for {{ category }} games</h2>
     <button @click="routeTo()" class="create-post-button">+ New Post</button>
     <div class="posts-container">
-      <div class="post" v-for="(post, index) in filteredPosts" :key="index">
+      <div class="post" v-for="post in filteredPosts" :key="post.id">
         <u-post
           @go-to-route="goToPost(post)"
           :grouped="true"
@@ -16,7 +16,7 @@
 
 <script>
 import { useRoute, useRouter } from "vue-router";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { useStore } from "vuex";
 
 export default {
@@ -26,9 +26,13 @@ export default {
     const route = useRoute();
     const router = useRouter();
 
-    const category = route.params.category;
+    const category = computed(() => {
+      return route.params.category;
+    });
 
-    store.dispatch("getPostsByCategory", category);
+    const getPosts = () => {
+      store.dispatch("getPostsByCategory", category.value);
+    };
 
     const filteredPosts = computed(() => {
       return store.state.posts;
@@ -49,6 +53,9 @@ export default {
       router.push({ name: "CreatePost" });
     };
 
+    getPosts();
+    watch(category, getPosts);
+
     return {
       filteredPosts,
       category,
@@ -61,6 +68,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
+
+h2 {
+  text-align: center;
+}
 
 .posts-container {
   flex-direction: column;

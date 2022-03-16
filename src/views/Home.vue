@@ -1,17 +1,21 @@
 <template>
   <u-page-container width="100%">
-    <div class="categories">
-      <h2>Categories</h2>
-      <div
-        v-for="(category, index) in categories"
-        :key="index"
-        class="category"
-        @click="routeTo(category.title)"
-        tabindex="0"
-        @keyup.enter="routeTo(category.title)"
-      >
-        <div style="z-index: 2">{{ category.title }}</div>
+    <div class="home">
+      <div class="categories">
+        <h2>Categories</h2>
+        <div
+          v-for="(category, index) in categories"
+          :key="index"
+          class="category"
+          @click="routeTo(category.title)"
+          tabindex="0"
+          @keyup.enter="routeTo(category.title)"
+        >
+          <div style="z-index: 2">{{ category.title }}</div>
+        </div>
       </div>
+      <Divider layout="vertical" />
+      <router-view />
     </div>
   </u-page-container>
 </template>
@@ -39,7 +43,7 @@ export default {
     const { categories } = useState(["categories"]);
 
     const routeTo = (category) => {
-      router.push({ name: "Category", params: { category: category } });
+      router.push({ name: "Category", params: { category } });
     };
 
     return {
@@ -52,6 +56,14 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
+
+.p-divider {
+  color: $nav-background-color;
+}
+
+.home {
+  display: flex;
+}
 
 .categories {
   margin: 4rem;

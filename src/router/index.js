@@ -7,6 +7,14 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    children: [
+      {
+        path: ":category",
+        name: "Category",
+        component: () =>
+          import(/* webpackChunkName: "category" */ "../views/Category.vue"),
+      },
+    ],
   },
   {
     path: "/about",
@@ -16,12 +24,6 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-  {
-    path: "/:category",
-    name: "Category",
-    component: () =>
-      import(/* webpackChunkName: "category" */ "../views/Category.vue"),
   },
   {
     name: "Post",
