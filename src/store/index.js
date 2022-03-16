@@ -11,6 +11,7 @@ import {
   getDoc,
   Timestamp,
   orderBy,
+  limit,
 } from "firebase/firestore";
 import { database } from "@/main";
 
@@ -36,6 +37,31 @@ export default createStore({
     },
   },
   actions: {
+    async getTopPosts({ commit }, { quantity }) {
+      const postsQuery = query(
+        collection(database, "posts"),
+        limit(quantity),
+        orderBy("created", "desc")
+      );
+      const unsubscribe = onSnapshot(postsQuery, async (querySnapshot) => {
+        let posts = [];
+        for (const snapshot of querySnapshot.docs) {
+          let user = await getDoc(
+            doc(database, "users", snapshot.data().userid)
+          );
+          let post = {
+            ...snapshot.data(),
+            id: snapshot.id,
+            author: user.data().username,
+            created: Timestamp.now(),
+          };
+          posts.push(post);
+        }
+        commit("setPosts", posts);
+      });
+
+      return unsubscribe;
+    },
     async getPostsByCategory({ commit }, category) {
       commit("setPosts", []);
       const postsQuery = query(
