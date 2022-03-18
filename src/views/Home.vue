@@ -14,7 +14,7 @@
           <div style="z-index: 2">{{ category.title }}</div>
         </div>
       </div>
-      <Divider layout="vertical" />
+      <u-Divider layout="vertical" />
       <router-view />
     </div>
   </u-page-container>

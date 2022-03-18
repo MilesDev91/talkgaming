@@ -1,5 +1,5 @@
 <template>
-  <Button
+  <u-Button
     class="create-post-button"
     icon="pi pi-plus"
     @click="$emit('routeTo')"

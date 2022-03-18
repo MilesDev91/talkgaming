@@ -1,18 +1,11 @@
 <template>
-  <div class="post-container">
-    <div class="title">
-      <button
-        class="view-post-button"
-        v-if="isGrouped"
-        @click="$emit('goToRoute')"
-      >
-        View
-      </button>
-      <h3 @click="$emit('goToRoute')">{{ title }}</h3>
-    </div>
+  <u-Panel>
+    <template @click="$emit('goToRoute')" #header>
+      <span @click="$emit('goToRoute')">{{ title }}</span>
+    </template>
     <p v-if="!isGrouped" class="content content-alone">{{ content }}</p>
     <p v-else class="content">by: {{ author }}</p>
-  </div>
+  </u-Panel>
 </template>
 
 <script>
@@ -48,31 +41,14 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/scss/styles.scss";
 
-.post-container {
-  background-color: $forum-contents-background-color;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.title {
-  background-color: $app-background;
-  width: 100%;
-  display: flex;
-  position: relative;
-}
-
-.title h3 {
+.p-panel-header {
   padding: 0.4rem;
-  margin: 0;
 }
 
-.title h4:hover {
+.p-panel-header:hover {
   cursor: pointer;
 }
 
@@ -85,19 +61,6 @@ export default {
 
 .content-alone {
   min-height: 5rem;
-}
-
-.view-post-button {
-  color: $text-color;
-  background-color: transparent;
-  border: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-  font-size: 1rem;
-}
-
-.view-post-button:hover {
-  cursor: pointer;
+  margin-bottom: 1rem;
 }
 </style>

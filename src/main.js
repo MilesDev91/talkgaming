@@ -20,6 +20,7 @@ import PrimeVue from "primevue/config";
 import Breadcrumb from "primevue/breadcrumb";
 import Divider from "primevue/divider";
 import Button from "primevue/button";
+import Panel from "primevue/panel";
 import router from "./router";
 import store from "./store";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
@@ -40,11 +41,12 @@ onAuthStateChanged(getAuth(), () => {
     app = createApp(App);
     app.use(PrimeVue);
 
-    app.component("Divider", Divider);
-    app.component("Breadcrumb", Breadcrumb);
+    app.component("u-Divider", Divider);
+    app.component("u-Breadcrumb", Breadcrumb);
     app.component("u-breadcrumbs", breadcrumbs);
-    app.component("Button", Button);
+    app.component("u-Button", Button);
     app.component("u-create-post-button", createPostButton);
+    app.component("u-Panel", Panel);
     app.component("u-header", header);
     app.component("u-post", post);
     app.component("u-comment", comment);

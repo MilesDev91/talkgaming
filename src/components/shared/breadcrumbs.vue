@@ -1,5 +1,5 @@
 <template>
-  <Breadcrumb :home="home" :model="items" />
+  <u-Breadcrumb :home="home" :model="items" />
 </template>
 
 <script>
