@@ -24,15 +24,15 @@ import Panel from "primevue/panel";
 import router from "./router";
 import store from "./store";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
-import header from "./components/shared/header.vue";
-import post from "./components/post.vue";
-import comment from "./components/comment.vue";
-import userForm from "./components/userForm.vue";
-import commentForm from "./components/commentForm.vue";
-import alert from "./components/alert.vue";
-import breadcrumbs from "./components/shared/breadcrumbs.vue";
-import createPostButton from "./components/createPostButton.vue";
-import pageContainer from "./components/pageContainer.vue";
+import header from "./components/shared/TheHeader.vue";
+import post from "./components/Post.vue";
+import comment from "./components/Comment.vue";
+import userForm from "./components/UserForm.vue";
+import commentForm from "./components/CommentForm.vue";
+import alert from "./components/Alert.vue";
+import breadcrumbs from "./components/shared/TheBreadcrumbs.vue";
+import createPostButton from "./components/CreatePostButton.vue";
+import pageContainer from "./components/PageContainer.vue";
 import "primeicons/primeicons.css";
 
 let app;
@@ -43,10 +43,11 @@ onAuthStateChanged(getAuth(), () => {
 
     app.component("u-Divider", Divider);
     app.component("u-Breadcrumb", Breadcrumb);
-    app.component("u-breadcrumbs", breadcrumbs);
     app.component("u-Button", Button);
-    app.component("u-create-post-button", createPostButton);
     app.component("u-Panel", Panel);
+
+    app.component("u-breadcrumbs", breadcrumbs);
+    app.component("u-create-post-button", createPostButton);
     app.component("u-header", header);
     app.component("u-post", post);
     app.component("u-comment", comment);

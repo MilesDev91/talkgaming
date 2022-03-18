@@ -6,8 +6,4 @@
 
 <style lang="scss">
 @import "./assets/scss/styles.scss";
-
-.p-breadcrumb {
-  margin: 2rem;
-}
 </style>

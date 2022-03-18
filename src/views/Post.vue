@@ -1,7 +1,9 @@
 <template>
   <u-page-container width="80%">
     <u-post :post="post" />
-    <button @click="toggleCommentForm()">+ Comment</button>
+    <button class="comment-form-button" @click="toggleCommentForm()">
+      + Comment
+    </button>
     <u-comment-form
       @create-comment="createComment"
       :isVisible="commentFormVisible"
@@ -84,7 +86,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
 
-button {
+.comment-form-button {
   width: 100px;
   font-size: 0.8rem;
   margin: 0 auto 1rem auto;
@@ -94,17 +96,5 @@ button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.post-container {
-  background-color: $forum-contents-background-color;
-  display: flex;
-  flex-direction: column;
-  border-radius: 0.4rem;
-  margin: 1rem auto;
-  width: 100%;
-  overflow: visible;
-  border-top: 2px solid $post-border;
-  border-bottom: 2px solid $post-border;
 }
 </style>

@@ -41,16 +41,8 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
-
-.p-panel-header {
-  padding: 0.4rem;
-}
-
-.p-panel-header:hover {
-  cursor: pointer;
-}
 
 .content {
   background-color: $post-content-color;

@@ -1,7 +1,6 @@
 <template>
   <u-page-container width="60%">
-    <h2>Welcome to TalkGaming!</h2>
-    <u-create-post-button @route-to="routeTo()" />
+    <h2 class="welcome-title">Welcome to TalkGaming!</h2>
     <div class="posts-container">
       <div class="post" v-for="post in topPosts" :key="post.id">
         <u-post
@@ -62,7 +61,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
 
-h2 {
+.welcome-title {
   text-align: center;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <u-page-container width="60%">
-    <h2>Posts for {{ category }} games</h2>
+    <h2 class="category-header">Posts for {{ category }} games</h2>
     <u-create-post-button @route-to="routeTo()" />
     <div class="posts-container">
       <div class="post" v-for="post in filteredPosts" :key="post.id">
@@ -69,7 +69,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
 
-h2 {
+.category-header {
   text-align: center;
 }
 

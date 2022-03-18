@@ -7,6 +7,7 @@
         name="title"
         placeholder="Title"
         v-model="input.title"
+        class="post-title"
       />
       <textarea
         placeholder="Type your post here"
@@ -14,8 +15,14 @@
         cols="30"
         rows="10"
         v-model="input.content"
+        class="post-content"
       ></textarea>
-      <button @keyup.enter="createPost()" type="submit" @click="createPost()">
+      <button
+        class="post-submit-button"
+        @keyup.enter="createPost()"
+        type="submit"
+        @click="createPost()"
+      >
         Submit
       </button>
     </form>
@@ -78,17 +85,17 @@ export default {
   color: $text-color;
 }
 
-input {
+.post-title {
   width: 80%;
   margin: 1rem auto;
 }
 
-textarea {
+.post-content {
   width: 80%;
   margin: auto;
 }
 
-button {
+.post-submit-button {
   width: 100px;
   margin: 1rem auto;
   background-color: $primary-button;
