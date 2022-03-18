@@ -19,6 +19,7 @@ import App from "./App.vue";
 import PrimeVue from "primevue/config";
 import Breadcrumb from "primevue/breadcrumb";
 import Divider from "primevue/divider";
+import Button from "primevue/button";
 import router from "./router";
 import store from "./store";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
@@ -29,6 +30,7 @@ import userForm from "./components/userForm.vue";
 import commentForm from "./components/commentForm.vue";
 import alert from "./components/alert.vue";
 import breadcrumbs from "./components/shared/breadcrumbs.vue";
+import createPostButton from "./components/createPostButton.vue";
 import pageContainer from "./components/pageContainer.vue";
 import "primeicons/primeicons.css";
 
@@ -41,6 +43,8 @@ onAuthStateChanged(getAuth(), () => {
     app.component("Divider", Divider);
     app.component("Breadcrumb", Breadcrumb);
     app.component("u-breadcrumbs", breadcrumbs);
+    app.component("Button", Button);
+    app.component("u-create-post-button", createPostButton);
     app.component("u-header", header);
     app.component("u-post", post);
     app.component("u-comment", comment);

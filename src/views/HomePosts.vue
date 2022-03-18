@@ -1,7 +1,7 @@
 <template>
   <u-page-container width="60%">
     <h2>Welcome to TalkGaming!</h2>
-    <button @click="routeTo()" class="create-post-button">+ New Post</button>
+    <u-create-post-button @route-to="routeTo()" />
     <div class="posts-container">
       <div class="post" v-for="post in topPosts" :key="post.id">
         <u-post
@@ -72,13 +72,6 @@ h2 {
   margin: 1rem 0;
   display: flex;
   overflow: hidden;
-}
-
-.create-post-button {
-  position: sticky;
-  background-color: $primary-button;
-  width: 150px;
-  align-self: center;
 }
 
 .post {
