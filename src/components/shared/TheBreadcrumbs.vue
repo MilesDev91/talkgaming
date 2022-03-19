@@ -1,5 +1,5 @@
 <template>
-  <u-Breadcrumb :home="home" :model="items" />
+  <u-prime-breadcrumb :home="home" :model="items" />
 </template>
 
 <script>

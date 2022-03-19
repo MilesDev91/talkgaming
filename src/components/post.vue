@@ -1,11 +1,11 @@
 <template>
-  <u-Panel>
+  <u-prime-panel>
     <template @click="$emit('goToRoute')" #header>
       <span @click="$emit('goToRoute')">{{ title }}</span>
     </template>
     <p v-if="!isGrouped" class="content content-alone">{{ content }}</p>
     <p v-else class="content">by: {{ author }}</p>
-  </u-Panel>
+  </u-prime-panel>
 </template>
 
 <script>
