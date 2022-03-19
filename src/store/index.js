@@ -21,6 +21,7 @@ export default createStore({
     categories: [],
     posts: [],
     comments: [],
+    windowWidth: null,
   },
   mutations: {
     setPosts(state, posts) {
@@ -34,6 +35,9 @@ export default createStore({
     },
     setComments(state, comments) {
       state.comments = comments;
+    },
+    setWindowWidth(state, width) {
+      state.windowWidth = width;
     },
   },
   actions: {

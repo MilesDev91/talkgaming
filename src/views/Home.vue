@@ -66,9 +66,7 @@ export default {
 }
 
 .categories {
-  margin: 4rem;
-  overflow: hidden;
-  min-height: 500px;
+  display: none;
 }
 
 .category {
