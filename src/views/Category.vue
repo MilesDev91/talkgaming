@@ -32,7 +32,8 @@ export default {
     });
 
     const getPosts = () => {
-      store.dispatch("getPostsByCategory", category.value);
+      if (route.params.category)
+        store.dispatch("getPostsByCategory", category.value);
     };
 
     const filteredPosts = computed(() => store.state.posts);
