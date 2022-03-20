@@ -45,9 +45,6 @@ export default {
 @import "@/assets/scss/styles.scss";
 
 .content {
-  background-color: $post-content-color;
-  text-align: start;
-  padding: 0.4rem;
   margin: 0;
 }
 

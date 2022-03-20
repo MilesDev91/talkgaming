@@ -1,6 +1,7 @@
 <template>
   <u-page-container :width="windowWidth > 600 ? '60%' : '90%'">
     <h2 class="welcome-title">Welcome to TalkGaming!</h2>
+    <u-post-menubar />
     <div class="posts-container">
       <div class="post" v-for="post in topPosts" :key="post.id">
         <u-post

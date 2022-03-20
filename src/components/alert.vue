@@ -4,6 +4,10 @@
   </p>
 </template>
 
+<script>
+// TODO: Implement alerts
+</script>
+
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
 

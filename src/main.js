@@ -33,8 +33,10 @@ import commentForm from "./components/CommentForm.vue";
 import alert from "./components/Alert.vue";
 import breadcrumbs from "./components/shared/TheBreadcrumbs.vue";
 import createPostButton from "./components/CreatePostButton.vue";
+import postMenubar from "./components/PostsMenubar.vue";
 import pageContainer from "./components/PageContainer.vue";
 import "primeicons/primeicons.css";
+import "primevue/resources/themes/md-dark-indigo/theme.css";
 
 let app;
 onAuthStateChanged(getAuth(), () => {
@@ -55,6 +57,7 @@ onAuthStateChanged(getAuth(), () => {
     app.component("u-comment", comment);
     app.component("u-user-form", userForm);
     app.component("u-comment-form", commentForm);
+    app.component("u-post-menubar", postMenubar);
     app.component("u-alert", alert);
     app.component("u-page-container", pageContainer);
 

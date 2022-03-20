@@ -1,7 +1,9 @@
 <template>
   <u-page-container :width="windowWidth > 600 ? '60%' : '90%'">
     <h2 class="category-header">Posts for {{ category }} games</h2>
+    <!-- TODO: Move create post button to menubar -->
     <u-create-post-button @route-to="routeTo()" />
+    <u-post-menubar />
     <div class="posts-container">
       <div class="post" v-for="post in filteredPosts" :key="post.id">
         <u-post
