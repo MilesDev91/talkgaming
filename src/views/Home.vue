@@ -1,20 +1,22 @@
 <template>
   <u-page-container width="100%">
     <div class="home">
-      <div class="categories">
-        <h2>Categories</h2>
-        <div
-          v-for="(category, index) in categories"
-          :key="index"
-          class="category"
-          @click="routeTo(category.title)"
-          tabindex="0"
-          @keyup.enter="routeTo(category.title)"
-        >
-          <div style="z-index: 2">{{ category.title }}</div>
+      <template v-if="windowWidth > 600">
+        <div class="categories">
+          <h2>Categories</h2>
+          <div
+            v-for="(category, index) in categories"
+            :key="index"
+            class="category"
+            @click="routeTo(category.title)"
+            tabindex="0"
+            @keyup.enter="routeTo(category.title)"
+          >
+            <div style="z-index: 2">{{ category.title }}</div>
+          </div>
         </div>
-      </div>
-      <u-prime-divider layout="vertical" />
+        <u-prime-divider layout="vertical" />
+      </template>
       <router-view />
     </div>
   </u-page-container>
@@ -39,8 +41,8 @@ export default {
 
     store.dispatch("getCategories");
 
-    // Store mappings
     const { categories } = useState(["categories"]);
+    const { windowWidth } = useState(["windowWidth"]);
 
     const routeTo = (category) => {
       router.push({ name: "Category", params: { category } });
@@ -49,6 +51,7 @@ export default {
     return {
       categories,
       routeTo,
+      windowWidth,
     };
   },
 };
@@ -66,7 +69,11 @@ export default {
 }
 
 .categories {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  margin-left: 2rem;
+  width: 20%;
 }
 
 .category {
@@ -76,15 +83,5 @@ export default {
   color: white;
   cursor: pointer;
   margin-bottom: 1rem;
-}
-
-@media (min-width: 500px) {
-  .categories {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    margin-left: 2rem;
-    width: 20%;
-  }
 }
 </style>

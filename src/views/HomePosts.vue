@@ -1,5 +1,5 @@
 <template>
-  <u-page-container width="60%">
+  <u-page-container :width="windowWidth > 600 ? '60%' : '90%'">
     <h2 class="welcome-title">Welcome to TalkGaming!</h2>
     <div class="posts-container">
       <div class="post" v-for="post in topPosts" :key="post.id">
@@ -17,6 +17,7 @@
 import { useRouter } from "vue-router";
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { useState } from "../maphelpers";
 
 export default {
   name: "HomePosts",
@@ -31,6 +32,7 @@ export default {
     const topPosts = computed(() => {
       return store.state.posts;
     });
+    const { windowWidth } = useState(["windowWidth"]);
 
     function goToPost(post) {
       router.push({
@@ -53,6 +55,7 @@ export default {
       topPosts,
       goToPost,
       routeTo,
+      windowWidth,
     };
   },
 };

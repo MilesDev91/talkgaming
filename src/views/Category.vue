@@ -1,5 +1,5 @@
 <template>
-  <u-page-container width="60%">
+  <u-page-container :width="windowWidth > 600 ? '60%' : '90%'">
     <h2 class="category-header">Posts for {{ category }} games</h2>
     <u-create-post-button @route-to="routeTo()" />
     <div class="posts-container">
@@ -18,6 +18,7 @@
 import { useRoute, useRouter } from "vue-router";
 import { computed, watch } from "vue";
 import { useStore } from "vuex";
+import { useState } from "@/maphelpers";
 
 export default {
   name: "Category",
@@ -34,9 +35,8 @@ export default {
       store.dispatch("getPostsByCategory", category.value);
     };
 
-    const filteredPosts = computed(() => {
-      return store.state.posts;
-    });
+    const filteredPosts = computed(() => store.state.posts);
+    const { windowWidth } = useState(["windowWidth"]);
 
     function goToPost(post) {
       router.push({
@@ -61,6 +61,7 @@ export default {
       category,
       goToPost,
       routeTo,
+      windowWidth,
     };
   },
 };
