@@ -91,6 +91,10 @@ button:hover {
   cursor: pointer;
 }
 
+.p-panel-content {
+  background-color: $nav-background-color;
+}
+
 .p-breadcrumb {
   margin: 2rem;
 }
