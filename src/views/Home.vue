@@ -2,8 +2,7 @@
   <u-page-container width="100%">
     <div class="home">
       <template v-if="windowWidth > 600">
-        <div class="categories">
-          <h2>Categories</h2>
+        <u-prime-panel header="Categories" class="categories">
           <div
             v-for="(category, index) in categories"
             :key="index"
@@ -14,7 +13,7 @@
           >
             <div style="z-index: 2">{{ category.title }}</div>
           </div>
-        </div>
+        </u-prime-panel>
         <u-prime-divider layout="vertical" />
       </template>
       <router-view />
@@ -69,16 +68,14 @@ export default {
 }
 
 .categories {
-  display: flex;
-  flex-direction: column;
   margin: 0;
   margin-left: 2rem;
   width: 20%;
+  background-color: #1e1e1e;
 }
 
 .category {
   display: flex;
-  position: relative;
   z-index: 2;
   color: white;
   cursor: pointer;
