@@ -1,7 +1,9 @@
 <template>
   <u-prime-panel>
     <template @click="$emit('goToRoute')" #header>
-      <span @click="$emit('goToRoute')">{{ title }}</span>
+      <span class="post-panel-header" @click="$emit('goToRoute')">{{
+        title
+      }}</span>
     </template>
     <p v-if="!isGrouped" class="content content-alone">{{ content }}</p>
     <p v-else class="content">by: {{ author }}</p>
@@ -51,5 +53,9 @@ export default {
 .content-alone {
   min-height: 5rem;
   margin-bottom: 1rem;
+}
+
+.post-panel-header:hover {
+  cursor: pointer;
 }
 </style>

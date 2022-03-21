@@ -1,5 +1,5 @@
 <template>
-  <u-prime-breadcrumb :home="home" :model="items" />
+  <u-prime-breadcrumb class="main-breadcrumb" :home="home" :model="items" />
 </template>
 
 <script>
@@ -58,4 +58,8 @@ export default {
 
 <style lang="scss">
 @import "@/assets/scss/styles.scss";
+
+.main-breadcrumb {
+  margin: 2rem;
+}
 </style>

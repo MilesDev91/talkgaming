@@ -1,5 +1,5 @@
 <template>
-  <u-prime-menubar :model="items" />
+  <u-prime-menubar class="posts-menubar" :model="items" />
 </template>
 
 <script>
@@ -30,3 +30,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/styles.scss";
+
+.posts-menubar {
+  padding: 0;
+}
+</style>

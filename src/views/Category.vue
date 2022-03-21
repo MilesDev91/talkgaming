@@ -80,7 +80,6 @@ export default {
 .posts-container {
   flex-direction: column;
   width: 100%;
-  margin: 1rem 0;
   display: flex;
   overflow: hidden;
 }

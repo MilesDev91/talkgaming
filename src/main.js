@@ -12,6 +12,8 @@ export const firebaseApp = initializeApp({
 });
 export const database = getFirestore(firebaseApp);
 
+import "primeicons/primeicons.css";
+import "primevue/resources/themes/md-dark-indigo/theme.css";
 import "@babel/polyfill";
 import "mutationobserver-shim";
 import { createApp } from "vue";
@@ -35,8 +37,6 @@ import breadcrumbs from "./components/shared/TheBreadcrumbs.vue";
 import createPostButton from "./components/CreatePostButton.vue";
 import postMenubar from "./components/PostsMenubar.vue";
 import pageContainer from "./components/PageContainer.vue";
-import "primeicons/primeicons.css";
-import "primevue/resources/themes/md-dark-indigo/theme.css";
 
 let app;
 onAuthStateChanged(getAuth(), () => {
