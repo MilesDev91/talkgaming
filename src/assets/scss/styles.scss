@@ -1,8 +1,6 @@
 /* COLOR SCHEME */
-$body-background: rgb(153, 153, 153);
-$app-background: #73767a;
 $text-color: #f2f9ff;
-$nav-background-color: rgb(90, 94, 97);
+$nav-background-color: #1e1e1e;
 $nav-link-active: rgb(215, 219, 223);
 $nav-text-color: rgb(247, 254, 255);
 $dark-text-color: rgb(103, 108, 112);
@@ -18,7 +16,7 @@ $post-title-background-color: rgb(172, 253, 253);
 $post-title-border-color: rgb(138, 197, 177);
 
 body {
-  background-color: $body-background;
+  background-color: black;
   margin: 0;
 }
 
@@ -70,15 +68,6 @@ h3 {
   font-size: 1rem;
 }
 
-button {
-  background-color: $primary-button;
-  color: $nav-text-color;
-  border-radius: 0.5rem;
-  border: none;
-  padding: 0.4rem;
-  font-size: 1.2rem;
-}
-
 button:hover {
   cursor: pointer;
 }
@@ -88,7 +77,6 @@ button:hover {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $text-color;
-  background-color: $app-background;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

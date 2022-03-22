@@ -14,5 +14,6 @@
   position: sticky;
   width: 150px;
   align-self: center;
+  margin-bottom: 1rem;
 }
 </style>
