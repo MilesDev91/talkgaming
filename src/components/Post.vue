@@ -2,8 +2,8 @@
   <u-prime-panel :class="[!isGrouped ? 'post-panel' : 'post-panel-grouped']">
     <template @click="$emit('goToRoute')" class="post-panel" #header>
       <div class="post-panel-header-container" v-if="!isGrouped">
-        <h4 class="post-panel-header" @click="goToPost(post)">{{ title }}</h4>
-        <h4 class="post-panel-header">by: {{ author }}</h4>
+        <h1 class="post-panel-header" @click="goToPost(post)">{{ title }}</h1>
+        <h1 class="post-panel-header">by: {{ author }}</h1>
       </div>
       <span v-else class="post-panel-header" @click="goToPost(post)">{{
         title
@@ -81,6 +81,7 @@ export default {
 
 .post-panel-header {
   margin: 0;
+  font-size: 1.2rem;
 }
 
 .post-panel-header:hover {

@@ -8,6 +8,7 @@
       @create-comment="createComment"
       :isVisible="commentFormVisible"
     />
+    <p>comments ({{ commentCount }})</p>
     <div class="comment-section" v-for="comment in comments" :key="comment.id">
       <u-comment :comment="comment" />
     </div>
@@ -46,6 +47,10 @@ export default {
       return store.state.comments;
     });
 
+    const commentCount = computed(() => {
+      return store.state.comments.length;
+    });
+
     const createComment = async (commentText) => {
       const comment = {
         postId: post.value.id,
@@ -78,6 +83,7 @@ export default {
       createComment,
       toggleCommentForm,
       comments,
+      commentCount,
     };
   },
 };

@@ -1,8 +1,10 @@
 <template>
-  <div class="comment">
-    <h2 class="comment-title">- {{ comment.author }} - {{ creationDate }}</h2>
-    <div>{{ comment.content }}</div>
-  </div>
+  <u-prime-panel class="comment">
+    <template #header>
+      <h2 class="comment-title">- {{ comment.author }} - {{ creationDate }}</h2>
+    </template>
+    <p class="comment-content">{{ comment.content }}</p>
+  </u-prime-panel>
 </template>
 
 <script>
@@ -35,11 +37,16 @@ export default {
 <style scoped>
 .comment {
   margin-bottom: 1rem;
-  min-width: 200px;
+  width: 100%;
   text-align: left;
 }
 
 .comment-title {
-  margin-left: 0;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.comment-content {
+  margin: 0;
 }
 </style>
