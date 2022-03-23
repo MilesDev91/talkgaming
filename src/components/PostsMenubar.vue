@@ -36,5 +36,7 @@ export default {
 
 .posts-menubar {
   padding: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 </style>

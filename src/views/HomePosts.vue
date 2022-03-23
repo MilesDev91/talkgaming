@@ -1,16 +1,20 @@
 <template>
   <u-page-container :width="windowWidth > 600 ? '60%' : '90%'">
-    <h2 class="welcome-title">Welcome to TalkGaming!</h2>
-    <u-post-menubar />
-    <div class="posts-container">
-      <div class="post" v-for="post in topPosts" :key="post.id">
-        <u-post
-          @go-to-route="goToPost(post)"
-          :grouped="true"
-          :post="post"
-        ></u-post>
-      </div>
+    <div class="welcome-header">
+      <img
+        class="controller-icon"
+        src="../assets/images/game_icon-0-0.png"
+        alt="half of a gaming controller"
+      />
+      <h2 class="welcome-title">Welcome to TalkGaming!</h2>
+      <img
+        class="controller-icon"
+        src="../assets/images/game_icon-1-0.png"
+        alt="half of a gaming controller"
+      />
     </div>
+    <u-post-menubar />
+    <u-post-list :posts="topPosts" />
   </u-page-container>
 </template>
 
@@ -35,17 +39,6 @@ export default {
     });
     const { windowWidth } = useState(["windowWidth"]);
 
-    function goToPost(post) {
-      router.push({
-        name: "Post",
-        params: {
-          title: post.title,
-          category: post.category,
-          id: post.id,
-        },
-      });
-    }
-
     const routeTo = () => {
       router.push({ name: "CreatePost" });
     };
@@ -54,7 +47,6 @@ export default {
 
     return {
       topPosts,
-      goToPost,
       routeTo,
       windowWidth,
     };
@@ -65,22 +57,20 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/styles.scss";
 
+.welcome-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 .welcome-title {
   text-align: center;
+  display: inline;
+  margin: 0 1rem;
 }
 
-.posts-container {
-  flex-direction: column;
-  width: 100%;
-  display: flex;
-  overflow: hidden;
-}
-
-.post {
-  border-top: 2px solid $post-border;
-}
-
-.post:last-child {
-  border-bottom: 2px solid $post-border;
+.controller-icon {
+  width: 40px;
 }
 </style>

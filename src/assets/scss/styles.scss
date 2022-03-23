@@ -16,7 +16,7 @@ $post-title-background-color: rgb(172, 253, 253);
 $post-title-border-color: rgb(138, 197, 177);
 
 body {
-  background-color: black;
+  background-color: #000000f0;
   margin: 0;
 }
 
@@ -87,4 +87,15 @@ button:hover {
     margin: 0 auto;
     box-shadow: 0px 0px 4px black;
   }
+}
+
+// PrimeVUE does not allow customizing the header or content element of a panel directly. Putting a class on the <template #header|#content > tag does not put the class on the div that replaces it. We have to do it in a global style sheet, or unscope the vue component, and I would rather leave all vue components scoped to avoid hard to find side-effects.
+.post-panel-grouped > .p-panel-header {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.post-panel-grouped .p-panel-content {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }

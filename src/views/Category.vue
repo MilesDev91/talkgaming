@@ -1,18 +1,10 @@
 <template>
   <u-page-container :width="windowWidth > 600 ? '60%' : '90%'">
-    <h2 class="category-header">{{ category }} games</h2>
+    <h2 class="category-header">{{ category }} Games</h2>
     <!-- TODO: Move create post button to menubar -->
-    <u-create-post-button @route-to="routeTo()" />
+    <u-create-post-button @route-to="routeToCreatePost()" />
     <u-post-menubar />
-    <div class="posts-container">
-      <div class="post" v-for="post in filteredPosts" :key="post.id">
-        <u-post
-          @go-to-route="goToPost(post)"
-          :grouped="true"
-          :post="post"
-        ></u-post>
-      </div>
-    </div>
+    <u-post-list :posts="filteredPosts" />
   </u-page-container>
 </template>
 
@@ -41,18 +33,7 @@ export default {
     const filteredPosts = computed(() => store.state.posts);
     const { windowWidth } = useState(["windowWidth"]);
 
-    function goToPost(post) {
-      router.push({
-        name: "Post",
-        params: {
-          title: post.title,
-          category: post.category,
-          id: post.id,
-        },
-      });
-    }
-
-    const routeTo = () => {
+    const routeToCreatePost = () => {
       router.push({ name: "CreatePost" });
     };
 
@@ -62,8 +43,7 @@ export default {
     return {
       filteredPosts,
       category,
-      goToPost,
-      routeTo,
+      routeToCreatePost,
       windowWidth,
     };
   },
@@ -75,20 +55,5 @@ export default {
 
 .category-header {
   text-align: center;
-}
-
-.posts-container {
-  flex-direction: column;
-  width: 100%;
-  display: flex;
-  overflow: hidden;
-}
-
-.post {
-  border-top: 2px solid $post-border;
-}
-
-.post:last-child {
-  border-bottom: 2px solid $post-border;
 }
 </style>

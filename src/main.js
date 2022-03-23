@@ -36,6 +36,7 @@ import alert from "./components/Alert.vue";
 import breadcrumbs from "./components/shared/TheBreadcrumbs.vue";
 import createPostButton from "./components/CreatePostButton.vue";
 import postMenubar from "./components/PostsMenubar.vue";
+import postList from "./components/PostList.vue";
 import pageContainer from "./components/PageContainer.vue";
 
 let app;
@@ -58,6 +59,7 @@ onAuthStateChanged(getAuth(), () => {
     app.component("u-user-form", userForm);
     app.component("u-comment-form", commentForm);
     app.component("u-post-menubar", postMenubar);
+    app.component("u-post-list", postList);
     app.component("u-alert", alert);
     app.component("u-page-container", pageContainer);
 
