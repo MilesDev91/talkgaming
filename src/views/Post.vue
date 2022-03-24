@@ -1,9 +1,12 @@
 <template>
   <u-page-container width="80%">
     <u-post :post="post" />
-    <button class="comment-form-button" @click="toggleCommentForm()">
-      + Comment
-    </button>
+    <u-prime-button
+      icon="pi pi-comment"
+      class="comment-form-button"
+      @click="toggleCommentForm()"
+      label="Comment"
+    />
     <u-comment-form
       @create-comment="createComment"
       :isVisible="commentFormVisible"
@@ -103,9 +106,9 @@ export default {
 @import "@/assets/scss/styles.scss";
 
 .comment-form-button {
-  width: 100px;
+  width: 130px;
   font-size: 0.8rem;
-  margin: 0 auto 1rem auto;
+  margin: 0 0 1rem 0;
 }
 
 .comment-section {
