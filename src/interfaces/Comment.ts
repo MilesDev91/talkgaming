@@ -4,4 +4,5 @@ export default interface Comment {
   author: string;
   created: Date;
   content: string;
+  id: string;
 }

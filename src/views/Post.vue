@@ -9,8 +9,12 @@
       :isVisible="commentFormVisible"
     />
     <p>comments ({{ commentCount }})</p>
-    <div class="comment-section" v-for="comment in comments" :key="comment.id">
-      <u-comment :comment="comment" />
+    <div
+      class="comment-section"
+      v-for="comment in commentTree"
+      :key="comment.id"
+    >
+      <u-comment :comment="comment" :depth="1" />
     </div>
   </u-page-container>
 </template>
@@ -22,6 +26,7 @@ import { computed, ref, watch } from "vue";
 import { getAuth } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { firebaseCreateComment } from "../helpers/firebase";
+import { generateCommentTree } from "../helpers/generateCommentTree";
 
 export default {
   name: "Post",
@@ -44,11 +49,16 @@ export default {
     );
 
     const comments = computed(() => {
+      console.log(store.state.comments);
       return store.state.comments;
     });
 
     const commentCount = computed(() => {
       return store.state.comments.length;
+    });
+
+    const commentTree = computed(() => {
+      return generateCommentTree(comments.value);
     });
 
     const createComment = async (commentText) => {
@@ -84,6 +94,7 @@ export default {
       toggleCommentForm,
       comments,
       commentCount,
+      commentTree,
     };
   },
 };

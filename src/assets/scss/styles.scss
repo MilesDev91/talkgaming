@@ -7,13 +7,11 @@ $dark-text-color: rgb(103, 108, 112);
 $forum-contents-background-color: aliceblue;
 $primary-button: rgb(57, 75, 78);
 $dark-highlight: rgb(55, 50, 61);
+$dark-border: rgba(255, 255, 255, 0.25);
 
 /* Post color */
 $post-title-color: white;
 $post-content-color: rgb(94, 94, 94);
-$post-border: rgb(168, 168, 168);
-$post-title-background-color: rgb(172, 253, 253);
-$post-title-border-color: rgb(138, 197, 177);
 
 body {
   background-color: #000000f0;
@@ -98,4 +96,13 @@ button:hover {
 .post-panel-grouped .p-panel-content {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.alternate-comment > .p-panel-header {
+  background: $dark-border;
+}
+
+// this sure is something huh. Using a generic .alternate-comment .p-panel-content worked for the first child but messed up children down the chain.
+.alternate-comment > * + * > .p-panel-content {
+  background: $dark-border;
 }

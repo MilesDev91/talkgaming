@@ -121,7 +121,7 @@ export default createStore({
       const unsubscribe = onSnapshot(q, async (querySnapshot) => {
         let comments = [];
         querySnapshot.forEach((document) => {
-          comments.push(document.data());
+          comments.push({ id: document.id, ...document.data() });
         });
         for (let comment of comments) {
           let author = await getDoc(doc(database, "users", comment.author));

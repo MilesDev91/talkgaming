@@ -1,9 +1,17 @@
 <template>
-  <u-prime-panel class="comment">
+  <u-prime-panel
+    :class="[depth % 2 == 0 ? 'alternate-comment comment' : 'comment']"
+  >
     <template #header>
       <h2 class="comment-title">- {{ comment.author }} - {{ creationDate }}</h2>
     </template>
     <p class="comment-content">{{ comment.content }}</p>
+    <u-comment
+      v-for="childComment in comment.children"
+      :key="childComment.id"
+      :comment="childComment"
+      :depth="depth + 1"
+    />
   </u-prime-panel>
 </template>
 
@@ -19,12 +27,16 @@ export default {
       author: String,
       created: Date,
       content: String,
+      children: Array,
     },
+    depth: Number,
   },
   setup(props) {
     const creationDate = computed(() => {
       return moment(props.comment.created.milliseconds).format("MMM D YY");
     });
+
+    console.log(props.depth % 2);
 
     return {
       props,
@@ -34,9 +46,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/scss/styles.scss";
+
 .comment {
-  margin-bottom: 1rem;
+  margin-top: 1rem;
   width: 100%;
   text-align: left;
 }
