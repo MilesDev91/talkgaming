@@ -36,8 +36,6 @@ export default {
       return moment(props.comment.created.milliseconds).format("MMM D YY");
     });
 
-    console.log(props.depth % 2);
-
     return {
       props,
       creationDate,

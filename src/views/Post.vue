@@ -49,7 +49,6 @@ export default {
     );
 
     const comments = computed(() => {
-      console.log(store.state.comments);
       return store.state.comments;
     });
 

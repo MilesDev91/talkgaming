@@ -9,7 +9,6 @@ export const generateCommentTree = (comments) => {
     }
   }
 
-  console.log(commentTree);
   return commentTree;
 };
 
