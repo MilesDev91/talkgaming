@@ -1,7 +1,7 @@
 <template>
   <u-prime-button
     class="create-post-button"
-    icon="pi pi-plus"
+    icon="pi pi-pencil"
     @click="$emit('routeTo')"
     label=" New Post"
   />
