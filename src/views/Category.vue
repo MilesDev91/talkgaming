@@ -10,7 +10,7 @@
 
 <script>
 import { useRoute, useRouter } from "vue-router";
-import { computed, watch } from "vue";
+import { computed, onUnmounted, watch } from "vue";
 import { useStore } from "vuex";
 import { useState } from "@/maphelpers";
 
@@ -39,6 +39,10 @@ export default {
 
     getPosts();
     watch(category, getPosts);
+
+    onUnmounted(() => {
+      store.commit("resetListeners");
+    });
 
     return {
       filteredPosts,

@@ -17,14 +17,13 @@
         v-model="input.content"
         class="post-content"
       ></textarea>
-      <button
+      <u-prime-button
         class="post-submit-button"
         @keyup.enter="createPost()"
         type="submit"
         @click="createPost()"
-      >
-        Submit
-      </button>
+        label="Submit"
+      />
     </form>
   </u-page-container>
 </template>
@@ -44,7 +43,7 @@ export default {
 
     const createPost = async () => {
       const user = getAuth().currentUser;
-      var id;
+      let id;
       const post = {
         category: route.params.category,
         content: input.content,
@@ -98,6 +97,5 @@ export default {
 .post-submit-button {
   width: 100px;
   margin: 1rem auto;
-  background-color: $primary-button;
 }
 </style>

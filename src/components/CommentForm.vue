@@ -8,12 +8,11 @@
       v-model="input.comment"
     />
     <div>
-      <button
+      <u-prime-button
         type="submit"
         @click.prevent="this.$emit('create-comment', input.comment)"
-      >
-        Submit
-      </button>
+        label="Submit"
+      />
     </div>
   </form>
 </template>

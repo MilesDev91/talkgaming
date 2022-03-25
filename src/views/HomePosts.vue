@@ -20,7 +20,7 @@
 
 <script>
 import { useRouter } from "vue-router";
-import { computed } from "vue";
+import { computed, onUnmounted } from "vue";
 import { useStore } from "vuex";
 import { useState } from "../maphelpers";
 
@@ -44,6 +44,10 @@ export default {
     };
 
     getPosts();
+
+    onUnmounted(() => {
+      store.commit("resetListeners");
+    });
 
     return {
       topPosts,

@@ -25,7 +25,7 @@
 <script>
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { computed, ref, watch } from "vue";
+import { computed, onUnmounted, ref, watch } from "vue";
 import { getAuth } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { firebaseCreateComment } from "../helpers/firebase";
@@ -48,6 +48,7 @@ export default {
       () => store.state.posts,
       () => {
         store.dispatch("getComments", post.value.id);
+        console.log(post.value);
       }
     );
 
@@ -88,6 +89,10 @@ export default {
         alert("You must log in to leave a comment");
       }
     };
+
+    onUnmounted(() => {
+      store.commit("resetListeners");
+    });
 
     return {
       post,

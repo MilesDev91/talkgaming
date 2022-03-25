@@ -22,6 +22,10 @@ export default createStore({
     posts: [],
     comments: [],
     windowWidth: null,
+    listeners: {
+      postsListenerUnsubscribe: null,
+      commentsListenerUnsubscribe: null,
+    },
   },
   mutations: {
     setPosts(state, posts) {
@@ -38,6 +42,25 @@ export default createStore({
     },
     setWindowWidth(state, width) {
       state.windowWidth = width;
+    },
+    setPostsListenerUnsubscribe(state, listenerUnsubscribe) {
+      if (state.listeners.postsListenerUnsubscribe) {
+        state.listeners.postsListenerUnsubscribe();
+      }
+      state.listeners.postsListenerUnsubscribe = listenerUnsubscribe;
+    },
+    setCommentsListenerUnsubscribe(state, listenerUnsubscribe) {
+      if (state.listeners.commentsListenerUnsubscribe) {
+        state.listeners.commentsListenerUnsubscribe();
+      }
+      state.listeners.commentsListenerUnsubscribe = listenerUnsubscribe;
+    },
+    resetListeners(state) {
+      for (let listener in state.listeners) {
+        if (listener) {
+          state.listeners[listener];
+        }
+      }
     },
   },
   actions: {
@@ -64,7 +87,7 @@ export default createStore({
         commit("setPosts", posts);
       });
 
-      return unsubscribe;
+      commit("setPostsListenerUnsubscribe", unsubscribe);
     },
     async getPostsByCategory({ commit }, category) {
       commit("setPosts", []);
@@ -72,7 +95,7 @@ export default createStore({
         collection(database, "posts"),
         where("category", "==", category)
       );
-      onSnapshot(postsQuery, async (querySnapshot) => {
+      const unsubscribe = onSnapshot(postsQuery, async (querySnapshot) => {
         let posts = [];
         for (const snapshot of querySnapshot.docs) {
           let user = await getDoc(
@@ -88,17 +111,26 @@ export default createStore({
         }
         commit("setPosts", posts);
       });
+
+      commit("setPostsListenerUnsubscribe", unsubscribe);
     },
     async getPostById({ commit }, id) {
-      onSnapshot(doc(database, "posts", id), async (snapshot) => {
-        let user = await getDoc(doc(database, "users", snapshot.data().userid));
-        let post = {
-          ...snapshot.data(),
-          id,
-          author: user.data().username,
-        };
-        commit("setPosts", post);
-      });
+      const unsubscribe = onSnapshot(
+        doc(database, "posts", id),
+        async (snapshot) => {
+          let user = await getDoc(
+            doc(database, "users", snapshot.data().userid)
+          );
+          let post = {
+            ...snapshot.data(),
+            id,
+            author: user.data().username,
+          };
+          commit("setPosts", post);
+        }
+      );
+
+      commit("setPostsListenerUnsubscribe", unsubscribe);
     },
     async getCategories({ commit }) {
       const categoriesSnapshot = await getDocs(
@@ -130,7 +162,7 @@ export default createStore({
         commit("setComments", comments);
       });
 
-      return unsubscribe;
+      commit("setCommentsListenerUnsubscribe", unsubscribe);
     },
   },
   modules: {},
